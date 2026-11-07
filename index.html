@@ -3,19 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080d18">
+<meta name="theme-color" content="#ffffff">
 <title>PLAY STREAM Premium</title>
 <meta name="description" content="PLAY STREAM - Koleksi video pilihan dengan tampilan premium.">
 
 <style>
 :root{
-  --bg:#080d18;
-  --panel:#101a2b;
-  --gold:#d6ad55;
-  --gold2:#f5d98d;
-  --text:#f5f5f5;
-  --muted:#a7b0c0;
-  --border:rgba(214,173,85,.25);
+  --bg:#f8fafc;
+  --panel:#ffffff;
+  --primary:#0284c7;
+  --primary-hover:#0369a1;
+  --text:#1e293b;
+  --muted:#64748b;
+  --border:#e2e8f0;
 }
 *{box-sizing:border-box}
 body{
@@ -26,9 +26,10 @@ body{
 }
 button,input{font:inherit}
 header{
-  background:linear-gradient(135deg,#101b30,#050810);
+  background:linear-gradient(135deg,#0284c7,#0369a1);
   border-bottom:1px solid var(--border);
   padding:18px 14px;
+  color:#ffffff;
 }
 .header-inner{
   max-width:1150px;
@@ -42,21 +43,23 @@ header{
 .logo{
   width:43px;height:43px;
   border-radius:12px;
-  background:linear-gradient(135deg,var(--gold2),#9b7025);
-  color:#111;
+  background:#ffffff;
+  color:#0284c7;
   display:grid;
   place-items:center;
   font-size:22px;
   font-weight:900;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
 }
-.brand h1{margin:0;font-size:21px;letter-spacing:1px}
-.brand small{color:var(--gold);font-size:10px;letter-spacing:2px}
+.brand h1{margin:0;font-size:21px;letter-spacing:1px;color:#ffffff}
+.brand small{color:#bae6fd;font-size:10px;letter-spacing:2px}
 .header-label{
-  color:var(--gold2);
-  border:1px solid var(--border);
+  color:#ffffff;
+  border:1px solid rgba(255,255,255,0.3);
   padding:7px 11px;
   border-radius:20px;
   font-size:11px;
+  background:rgba(255,255,255,0.1);
 }
 .container{
   max-width:1150px;
@@ -72,6 +75,7 @@ header{
   padding:13px;
   margin-bottom:20px;
   scroll-margin-top:10px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
 }
 .player-heading{
   display:flex;
@@ -83,7 +87,7 @@ header{
 .player-heading h2{
   margin:0;
   font-size:16px;
-  color:var(--gold2);
+  color:var(--primary);
 }
 .player-heading span{font-size:10px;color:var(--muted)}
 .player-frame{
@@ -110,17 +114,23 @@ header{
   flex:1;
   min-width:100px;
   border:1px solid var(--border);
-  background:#18243a;
-  color:var(--gold2);
+  background:#f1f5f9;
+  color:var(--text);
   padding:11px 9px;
   border-radius:8px;
   cursor:pointer;
   font-size:12px;
+  transition: background 0.2s;
 }
+.action-btn:hover{background:#e2e8f0;}
 .action-btn.primary{
-  background:var(--gold);
-  color:#111;
+  background:var(--primary);
+  color:#ffffff;
   font-weight:bold;
+  border: none;
+}
+.action-btn.primary:hover{
+  background:var(--primary-hover);
 }
 .notice{
   color:var(--muted);
@@ -131,13 +141,13 @@ header{
 
 /* HERO */
 .hero{
-  background:linear-gradient(120deg,#14233b,#0c1423 65%,#201a10);
-  border:1px solid var(--border);
+  background:linear-gradient(120deg,#e0f2fe,#f0fdf4 65%,#e0e7ff);
+  border:1px solid #bae6fd;
   border-radius:17px;
   padding:22px 18px;
   margin-bottom:20px;
 }
-.hero h2{margin:0 0 8px;font-size:23px;color:var(--gold2)}
+.hero h2{margin:0 0 8px;font-size:23px;color:#0369a1}
 .hero p{margin:0;color:var(--muted);font-size:13px;line-height:1.6}
 .section-title{
   display:flex;
@@ -146,8 +156,8 @@ header{
   gap:10px;
   margin:22px 0 13px;
 }
-.section-title h2{font-size:17px;margin:0}
-.section-title span{color:var(--gold);font-size:11px}
+.section-title h2{font-size:17px;margin:0;color:var(--text)}
+.section-title span{color:var(--primary);font-size:11px;font-weight:bold}
 .search-wrap{margin-bottom:13px}
 .search-wrap input{
   width:100%;
@@ -155,10 +165,11 @@ header{
   border:1px solid var(--border);
   border-radius:10px;
   padding:13px 14px;
-  color:white;
+  color:var(--text);
   outline:none;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
-.search-wrap input:focus{border-color:var(--gold)}
+.search-wrap input:focus{border-color:var(--primary);box-shadow: 0 0 0 3px rgba(2,132,199,0.15);}
 .tabs{
   display:flex;
   gap:8px;
@@ -175,8 +186,9 @@ header{
   white-space:nowrap;
   cursor:pointer;
   font-size:12px;
+  transition: all 0.2s;
 }
-.tab.active{background:var(--gold);color:#15100a;font-weight:bold}
+.tab.active{background:var(--primary);color:#ffffff;font-weight:bold;border-color:var(--primary)}
 
 /* VIDEO GRID */
 .video-grid{
@@ -191,13 +203,14 @@ header{
   overflow:hidden;
   cursor:pointer;
   transition:.2s;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.05);
 }
-.video-card:hover{transform:translateY(-3px);border-color:var(--gold)}
+.video-card:hover{transform:translateY(-3px);border-color:var(--primary);box-shadow: 0 10px 15px -3px rgba(0,0,0,0.08)}
 .thumb{
   position:relative;
   aspect-ratio:16/10;
   overflow:hidden;
-  background:#172235;
+  background:#e2e8f0;
 }
 .thumb img{
   width:100%;
@@ -220,9 +233,10 @@ header{
   display:grid;
   place-items:center;
   padding-left:3px;
-  background:rgba(214,173,85,.92);
-  color:#111;
+  background:rgba(2,132,199,0.92);
+  color:#ffffff;
   font-size:19px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 }
 .video-info{padding:10px}
 .video-info h3{
@@ -230,6 +244,7 @@ header{
   line-height:1.45;
   margin:0 0 7px;
   min-height:35px;
+  color:var(--text);
 }
 .video-meta{
   display:flex;
@@ -237,7 +252,7 @@ header{
   color:var(--muted);
   font-size:10px;
 }
-.video-meta b{color:var(--gold)}
+.video-meta b{color:var(--primary)}
 .empty{
   display:none;
   text-align:center;
@@ -255,12 +270,14 @@ header{
 .page-btn{
   border:1px solid var(--border);
   background:var(--panel);
-  color:white;
+  color:var(--text);
   padding:9px 13px;
   border-radius:8px;
   cursor:pointer;
+  transition: background 0.2s;
 }
-.page-btn.active{background:var(--gold);color:#111;font-weight:bold}
+.page-btn:hover{background:#f1f5f9;}
+.page-btn.active{background:var(--primary);color:#ffffff;font-weight:bold;border-color:var(--primary)}
 .page-btn:disabled{opacity:.35;cursor:not-allowed}
 footer{
   text-align:center;
@@ -270,15 +287,16 @@ footer{
   font-size:11px;
   line-height:1.8;
   margin-top:30px;
+  background: #ffffff;
 }
-footer strong{color:var(--gold)}
+footer strong{color:var(--primary)}
 
-/* --- STYLING IN-PAGE PUSH (MENUTUPI VIDEO DI TENGAH) --- */
+/* --- STYLING IN-PAGE PUSH --- */
 .inp-push-container {
   position: fixed;
   inset: 0;
   z-index: 99999;
-  background: rgba(4, 8, 15, 0.85);
+  background: rgba(15, 23, 42, 0.6);
   backdrop-filter: blur(4px);
   display: none;
   align-items: center;
@@ -297,13 +315,13 @@ footer strong{color:var(--gold)}
 }
 
 .inp-push-box {
-  background: linear-gradient(145deg, #17243a, #090e18);
-  border: 1px solid var(--gold);
+  background: #ffffff;
+  border: 1px solid var(--border);
   border-radius: 16px;
   padding: 20px;
   width: 100%;
   max-width: 380px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -323,7 +341,7 @@ footer strong{color:var(--gold)}
   top: 10px;
   right: 12px;
   border: 0;
-  background: rgba(255, 255, 255, 0.1);
+  background: #f1f5f9;
   color: var(--muted);
   width: 30px;
   height: 30px;
@@ -333,10 +351,11 @@ footer strong{color:var(--gold)}
   z-index: 10;
   display: grid;
   place-items: center;
+  transition: background 0.2s;
 }
 .inp-push-close:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
+  background: #e2e8f0;
+  color: var(--text);
 }
 
 .inp-push-thumb {
@@ -354,8 +373,8 @@ footer strong{color:var(--gold)}
 
 .inp-push-badge {
   display: inline-block;
-  background: var(--gold);
-  color: #111;
+  background: #e0f2fe;
+  color: var(--primary);
   font-size: 10px;
   font-weight: bold;
   padding: 3px 8px;
@@ -365,7 +384,7 @@ footer strong{color:var(--gold)}
 }
 
 .inp-push-title {
-  color: var(--gold2);
+  color: var(--text);
   font-size: 15px;
   font-weight: bold;
   margin: 0 0 6px;
@@ -373,15 +392,15 @@ footer strong{color:var(--gold)}
 }
 
 .inp-push-desc {
-  color: #c2c9d4;
+  color: var(--muted);
   font-size: 12px;
   margin: 0 0 16px;
   line-height: 1.5;
 }
 
 .inp-push-btn {
-  background: var(--gold);
-  color: #111;
+  background: var(--primary);
+  color: #ffffff;
   border: none;
   width: 100%;
   padding: 10px;
@@ -389,6 +408,10 @@ footer strong{color:var(--gold)}
   font-size: 13px;
   border-radius: 8px;
   cursor: pointer;
+  transition: background 0.2s;
+}
+.inp-push-btn:hover {
+  background: var(--primary-hover);
 }
 
 @media(max-width:850px){
@@ -487,10 +510,9 @@ footer strong{color:var(--gold)}
   © 2026 PLAY STREAM. All Rights Reserved.
 </footer>
 
-<!-- WIDGET IN-PAGE PUSH (DI TENGAH MENUTUPI LAYAR / VIDEO) -->
+<!-- WIDGET IN-PAGE PUSH -->
 <div class="inp-push-container" id="inpPushContainer">
   <div class="inp-push-box" onclick="clickInPagePush()">
-    <!-- Tombol X sekarang membuka Smartlink dan menutup pop-up -->
     <button class="inp-push-close" onclick="closeInPagePush(event)" aria-label="Tutup">&times;</button>
     <img src="https://i.ibb.co/LXv5hVDX/no-mark-React-Native-snapshot-image.png" alt="Notification" class="inp-push-thumb">
     <div class="inp-push-content">
@@ -653,7 +675,6 @@ function playVideo(id){
 
   currentVideo=video;
 
-  // Buka Smartlink dari klik pengunjung.
   window.open(SMARTLINK,"_blank");
 
   document.getElementById("videoPlayer").src=video.url;
@@ -666,7 +687,6 @@ function playVideo(id){
     block:"start"
   });
 
-  // Mulai sistem In-Page Push setelah video diputar
   startPushAfterVideo();
 }
 
@@ -709,11 +729,11 @@ function fullscreenPlayer(){
   }
 }
 
-/* LOGIKA IN-PAGE PUSH: MAKSIMAL 5 KALI PER VIDEO (JEDA 10 DETIK) */
+/* LOGIKA IN-PAGE PUSH */
 const inpPushContainer=document.getElementById("inpPushContainer");
 
 const MAX_POPUPS=3;
-const POPUP_DELAY=15000; // 10 detik
+const POPUP_DELAY=15000;
 
 let pushTimer=null;
 let videoSelected=false;
@@ -747,23 +767,20 @@ function startPushAfterVideo(){
   schedulePush();
 }
 
-/* Tombol X (Tutup) diarahkan ke Smartlink & Menutup Pop-up */
 function closeInPagePush(event){
-  event.stopPropagation(); // Mencegah klik tembus ke elemen box di bawahnya
-  window.open(SMARTLINK, "_blank"); // Redirect ke smartlink
-  inpPushContainer.classList.remove("show"); // Sembunyikan pop-up
+  event.stopPropagation();
+  window.open(SMARTLINK, "_blank");
+  inpPushContainer.classList.remove("show");
 
-  schedulePush(); // Jadwalkan pop-up berikutnya
+  schedulePush();
 }
 
-/* Jika kotak In-Page Push diklik */
 function clickInPagePush(){
   window.open(SMARTLINK, "_blank");
   inpPushContainer.classList.remove("show");
   schedulePush();
 }
 
-/* MEMUAT DAFTAR VIDEO DAN LANGSUNG MEMUAT VIDEO PERTAMA PADA PEMUTAR UTAMA */
 renderVideos();
 
 if(videos.length > 0){
