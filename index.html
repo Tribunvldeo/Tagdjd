@@ -18,9 +18,7 @@
         // CONFIGURABLE MONETIZATION & AD SETTINGS
         window.CONFIG = {
             SMARTLINK_URL: "https://www.profitableratecpmnetwork.com/agijdjkf?key=b68403d796344c04660419b144a9cea4", // Ganti dengan URL Smartlink / Monetisasi Anda
-            ENABLE_POPUNDER: true,
-            FLOATING_REPEAT_COUNT: 4,
-            FLOATING_DELAY_SECONDS: 20
+            ENABLE_POPUNDER: true
         };
     </script>
 
@@ -76,14 +74,6 @@
 
         .nav-gradient {
             background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
-        }
-
-        @keyframes pulse-border {
-            0%, 100% { border-color: rgba(229, 9, 20, 0.8); }
-            50% { border-color: rgba(255, 255, 255, 0.4); }
-        }
-        .pulse-ad {
-            animation: pulse-border 2s infinite;
         }
     </style>
 </head>
@@ -166,7 +156,7 @@
                     DUNIA DEWASA
                 </h1>
                 <p id="hero-desc" class="text-xs md:text-base text-gray-300 line-clamp-3 md:line-clamp-4 leading-relaxed max-w-xl drop-shadow">
-                    Hanya sekedar hiburan,selamat menikmati
+                    Hanya sekedar hiburan, selamat menikmati
                 </p>
                 
                 <!-- Action Buttons -->
@@ -191,10 +181,7 @@
                 <h2 class="text-lg md:text-2xl font-bold mb-4 flex items-center text-white tracking-wide">
                     <span class="w-1 h-5 bg-brand mr-2 rounded-full"></span>Sedang Tren Sekarang
                 </h2>
-                <!-- Grid Tampilan ke Bawah -->
-                <div id="row-trending" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                    <!-- Cards will be populated by JS -->
-                </div>
+                <div id="row-trending" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"></div>
             </div>
 
             <!-- Row 2: Film Terpopuler -->
@@ -202,10 +189,7 @@
                 <h2 class="text-lg md:text-2xl font-bold mb-4 flex items-center text-white tracking-wide">
                     <span class="w-1 h-5 bg-brand mr-2 rounded-full"></span>Film Blockbuster Pilihan
                 </h2>
-                <!-- Grid Tampilan ke Bawah -->
-                <div id="row-movies" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                    <!-- Cards will be populated by JS -->
-                </div>
+                <div id="row-movies" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"></div>
             </div>
 
             <!-- Row 3: Serial TV -->
@@ -213,10 +197,7 @@
                 <h2 class="text-lg md:text-2xl font-bold mb-4 flex items-center text-white tracking-wide">
                     <span class="w-1 h-5 bg-brand mr-2 rounded-full"></span>Serial TV Wajib Tonton
                 </h2>
-                <!-- Grid Tampilan ke Bawah -->
-                <div id="row-series" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                    <!-- Cards will be populated by JS -->
-                </div>
+                <div id="row-series" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"></div>
             </div>
 
             <!-- Row 4: Daftar Saya -->
@@ -224,10 +205,7 @@
                 <h2 class="text-lg md:text-2xl font-bold mb-4 flex items-center text-white tracking-wide">
                     <span class="w-1 h-5 bg-brand mr-2 rounded-full"></span>Daftar Tontonan Saya
                 </h2>
-                <!-- Grid Tampilan ke Bawah -->
-                <div id="row-mylist" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                    <!-- Empty State / Dynamically populated -->
-                </div>
+                <div id="row-mylist" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"></div>
             </div>
 
         </div>
@@ -332,36 +310,6 @@
         </div>
     </div>
 
-    <!-- FLOATING VIDEO POPUP WIDGET (4x Repeat, Smartlink Close 'X') -->
-    <div id="floating-popup" class="fixed bottom-4 right-4 z-50 w-72 md:w-80 bg-cardBg border-2 border-brand rounded-xl shadow-2xl overflow-hidden hidden pulse-ad transition-all duration-300">
-        <!-- Banner & Close Bar -->
-        <div class="bg-black/90 px-3 py-1.5 flex items-center justify-between border-b border-gray-800">
-            <div class="flex items-center space-x-2">
-                <span class="w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
-                <span class="text-[11px] font-bold text-yellow-400 tracking-wider uppercase">Sponsor Live Preview</span>
-            </div>
-            
-            <!-- Close Button (X) - Always opens SmartLink -->
-            <button onclick="closeFloatingPopupWithSmartlink(event)" class="text-gray-400 hover:text-white bg-gray-800 hover:bg-brand w-6 h-6 rounded-full flex items-center justify-center transition focus:outline-none" title="Tutup">
-                <i class="fa-solid fa-xmark text-xs"></i>
-            </button>
-        </div>
-
-        <!-- Video Player Body -->
-        <div class="relative h-44 bg-black">
-            <iframe id="floating-video-iframe" class="w-full h-full border-0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-            
-            <!-- Clickable Smartlink Overlay Area -->
-            <div onclick="openSmartlink(event)" class="absolute inset-0 bg-transparent cursor-pointer z-10" title="Klik untuk nonton versi lengkap"></div>
-        </div>
-
-        <!-- Floating Footer Call to Action -->
-        <div onclick="openSmartlink(event)" class="bg-gradient-to-r from-brand to-red-800 p-2.5 text-center cursor-pointer hover:brightness-110 transition flex items-center justify-between px-4">
-            <span class="text-xs font-bold text-white uppercase tracking-wide">Tonton Bebas Iklan Sekarang</span>
-            <i class="fa-solid fa-chevron-right text-xs text-white"></i>
-        </div>
-    </div>
-
     <!-- TOAST NOTIFICATION -->
     <div id="toast" class="fixed bottom-6 left-6 z-50 bg-brand text-white px-5 py-3 rounded-lg shadow-xl flex items-center space-x-3 transform translate-y-20 opacity-0 transition-all duration-300">
         <i class="fa-solid fa-circle-check text-xl"></i>
@@ -370,7 +318,7 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script>
-        // DATA MASTER CATALOG FILM & SERIAL (23 MEDIA DENGAN GAMBAR BARU)
+        // DATA MASTER CATALOG FILM & SERIAL
         const mediaDatabase = [
             {
                 id: 'm1',
@@ -719,10 +667,8 @@
             }
         ];
 
-        // FLOATING POPUP & POPUNDER MONETIZATION LOGIC
+        // POPUNDER MONETIZATION LOGIC (Pop-up mengambang sudah dihapus)
         let hasTriggeredPopunder = false;
-        let floatingShowCount = 0;
-        let floatingTimer = null;
 
         function triggerPopunder(event) {
             if (window.CONFIG.ENABLE_POPUNDER && !hasTriggeredPopunder) {
@@ -739,45 +685,6 @@
             window.open(window.CONFIG.SMARTLINK_URL, '_blank');
         }
 
-        function initFloatingPopup() {
-            scheduleFloatingPopup(2000); 
-        }
-
-        function scheduleFloatingPopup(delayMs) {
-            if (floatingShowCount >= window.CONFIG.FLOATING_REPEAT_COUNT) return;
-
-            floatingTimer = setTimeout(() => {
-                showFloatingPopup();
-            }, delayMs);
-        }
-
-        function showFloatingPopup() {
-            if (floatingShowCount >= window.CONFIG.FLOATING_REPEAT_COUNT) return;
-
-            floatingShowCount++;
-            const popup = document.getElementById('floating-popup');
-            const iframe = document.getElementById('floating-video-iframe');
-
-            iframe.src = 'https://trbnvideo.live/e/vilVUzaF';
-            popup.classList.remove('hidden');
-        }
-
-        function closeFloatingPopupWithSmartlink(event) {
-            if (event) event.stopPropagation();
-
-            openSmartlink(event);
-
-            const popup = document.getElementById('floating-popup');
-            const iframe = document.getElementById('floating-video-iframe');
-            popup.classList.add('hidden');
-            iframe.src = '';
-
-            if (floatingShowCount < window.CONFIG.FLOATING_REPEAT_COUNT) {
-                showToast(`Iklan ditutup. Re-appear ke-${floatingShowCount + 1} dalam ${window.CONFIG.FLOATING_DELAY_SECONDS}d`);
-                scheduleFloatingPopup(window.CONFIG.FLOATING_DELAY_SECONDS * 1000);
-            }
-        }
-
         // State Management
         let myList = JSON.parse(localStorage.getItem('streamflix_mylist')) || [];
         let activeMediaForModal = null;
@@ -787,7 +694,6 @@
         window.onload = () => {
             renderAllRows();
             updateMyListBadge();
-            initFloatingPopup();
 
             window.addEventListener('scroll', () => {
                 const navbar = document.getElementById('navbar');
