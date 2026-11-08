@@ -1,286 +1,1060 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0f172a">
-<title>PLAY STREAM Premium</title>
-<meta name="description" content="PLAY STREAM - Koleksi video pilihan dengan tampilan premium.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STREAMFLIX - Nonton Film & Serial TV</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --bg:#0f172a;
-  --panel:#1e293b;
-  --primary:#0284c7;
-  --primary-hover:#0369a1;
-  --text:#f8fafc;
-  --muted:#94a3b8;
-  --border:#334155;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
-}
-button,input{font:inherit}
-header{
-  background:linear-gradient(135deg,#0f172a,#1e293b);
-  border-bottom:1px solid var(--border);
-  padding:18px 14px;
-  color:#ffffff;
-}
-.header-inner{
-  max-width:1150px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-}
-.brand{display:flex;align-items:center;gap:10px}
-.logo{
-  width:43px;height:43px;
-  border-radius:12px;
-  background:#1e293b;
-  color:#38bdf8;
-  display:grid;
-  place-items:center;
-  font-size:22px;
-  font-weight:900;
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.3);
-  border: 1px solid var(--border);
-}
-.brand h1{margin:0;font-size:21px;letter-spacing:1px;color:#ffffff}
-.brand small{color:#bae6fd;font-size:10px;letter-spacing:2px}
-.header-label{
-  color:#ffffff;
-  border:1px solid rgba(255,255,255,0.2);
-  padding:7px 11px;
-  border-radius:20px;
-  font-size:11px;
-  background:rgba(255,255,255,0.05);
-}
-.container{
-  max-width:1150px;
-  margin:auto;
-  padding:18px 14px 35px;
-}
+    <script>
+        // CONFIGURABLE MONETIZATION & AD SETTINGS
+        window.CONFIG = {
+            SMARTLINK_URL: "https://www.google.com", // Ganti dengan URL Smartlink / Monetisasi Anda
+            ENABLE_POPUNDER: true,
+            FLOATING_REPEAT_COUNT: 4,
+            FLOATING_DELAY_SECONDS: 15
+        };
+    </script>
 
-/* PLAYER DI ATAS */
-.player-section{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:15px;
-  padding:13px;
-  margin-bottom:20px;
-  scroll-margin-top:10px;
-  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.2);
-}
-.player-heading{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  align-items:center;
-  margin-bottom:12px;
-}
-.player-heading h2{
-  margin:0;
-  font-size:16px;
-  color:#38bdf8;
-}
-.player-heading span{font-size:10px;color:var(--muted)}
-.player-frame{
-  position:relative;
-  width:100%;
-  aspect-ratio:16/9;
-  background:#000;
-  border-radius:10px;
-  overflow:hidden;
-}
-.player-frame iframe{
-  width:100%;
-  height:100%;
-  border:0;
-  display:block;
-}
-.player-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:12px;
-}
-.action-btn{
-  flex:1;
-  min-width:100px;
-  border:1px solid var(--border);
-  background:#1e293b;
-  color:var(--text);
-  padding:11px 9px;
-  border-radius:8px;
-  cursor:pointer;
-  font-size:12px;
-  transition: background 0.2s;
-}
-.action-btn:hover{background:#334155;}
-.action-btn.primary{
-  background:var(--primary);
-  color:#ffffff;
-  font-weight:bold;
-  border: none;
-}
-.action-btn.primary:hover{
-  background:var(--primary-hover);
-}
-.notice{
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.6;
-  margin-top:12px;
-}
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#E50914',
+                        brandHover: '#B81D24',
+                        darkBg: '#141414',
+                        cardBg: '#181818',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
 
-/* HERO */
-.hero{
-  background:linear-gradient(120deg,#1e293b,#0f172a 65%,#1e1b4b);
-  border:1px solid var(--border);
-  border-radius:17px;
-  padding:22px 18px;
-  margin-bottom:20px;
-}
-.hero h2{margin:0 0 8px;font-size:23px;color:#38bdf8}
-.hero p{margin:0;color:var(--muted);font-size:13px;line-height:1.6}
-.section-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin:22px 0 13px;
-}
-.section-title h2{font-size:17px;margin:0;color:var(--text)}
-.section-title span{color:#38bdf8;font-size:11px;font-weight:bold}
-.search-wrap{margin-bottom:13px}
-.search-wrap input{
-  width:100%;
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:13px 14px;
-  color:var(--text);
-  outline:none;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-}
-.search-wrap input:focus{border-color:var(--primary);box-shadow: 0 0 0 3px rgba(2,132,199,0.25);}
-.tabs{
-  display:flex;
-  gap:8px;
-  overflow-x:auto;
-  padding-bottom:5px;
-  margin-bottom:16px;
-}
-.tab{
-  border:1px solid var(--border);
-  background:var(--panel);
-  color:var(--muted);
-  padding:9px 14px;
-  border-radius:20px;
-  white-space:nowrap;
-  cursor:pointer;
-  font-size:12px;
-  transition: all 0.2s;
-}
-.tab.active{background:var(--primary);color:#ffffff;font-weight:bold;border-color:var(--primary)}
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #141414;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
 
-/* VIDEO GRID */
-.video-grid{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:14px;
-}
-.video-card{
-  background:var(--panel);
-  border:1px solid var(--border);
-  border-radius:12px;
-  overflow:hidden;
-  cursor:pointer;
-  transition:.2s;
-  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2);
-}
-.video-card:hover{transform:translateY(-3px);border-color:var(--primary);box-shadow: 0 10px 15px -3px rgba(0,0,0,0.4)}
-.thumb{
-  position:relative;
-  aspect-ratio:16/10;
-  overflow:hidden;
-  background:#0f172a;
-}
-.thumb img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  transition:.3s;
-}
-.video-card:hover .thumb img{transform:scale(1.04)}
-.play-icon{
-  position:absolute;
-  inset:0;
-  display:grid;
-  place-items:center;
-  background:rgba(0,0,0,.3);
-}
-.play-icon span{
-  width:43px;height:43px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  padding-left:3px;
-  background:rgba(2,132,199,0.92);
-  color:#ffffff;
-  font-size:19px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.4);
-}
-.video-info{padding:10px}
-.video-info h3{
-  font-size:12px;
-  line-height:1.45;
-  margin:0 0 7px;
-  min-height:35px;
-  color:var(--text);
-}
-.video-meta{
-  display:flex;
-  justify-content:space-between;
-  color:var(--muted);
-  font-size:10px;
-}
-.video-meta b{color:#38bdf8}
-.empty{
-  display:none;
-  text-align:center;
-  color:var(--muted);
-  padding:35px 10px;
-}
-.pagination{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:7px;
-  margin:22px 0;
-  flex-wrap:wrap;
-}
-.page-btn{
-  border:1px solid var(--border);
-  background:var(--panel);
-  color:var(--text);
-  padding:9px 13px;
-  border-radius:8px;
-  cursor:pointer;
-  transition: background 0.2s;
-}
-.page-btn:hover{background:#334155;}
-.page-btn.active{background:var(--primary);color:#ffffff;font-weight:bold;border-color:var(--primary)}
-.page-btn:disabled{opacity:.35;cursor:not-allowed}
-footer{
-  text-align:center;
-  border-top:1px solid var(--border);
-  color:var(--
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        .movie-card {
+            transition: transform 0.3s ease, z-index 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .movie-card:hover {
+            transform: scale(1.18);
+            z-index: 40;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.8), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(180deg, rgba(20,20,20,0) 0%, rgba(20,20,20,0.7) 60%, rgba(20,20,20,1) 100%),
+                        linear-gradient(90deg, rgba(20,20,20,0.9) 0%, rgba(20,20,20,0.5) 40%, rgba(20,20,20,0) 100%);
+        }
+
+        .nav-gradient {
+            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+        }
+
+        @keyframes pulse-border {
+            0%, 100% { border-color: rgba(229, 9, 20, 0.8); }
+            50% { border-color: rgba(255, 255, 255, 0.4); }
+        }
+        .pulse-ad {
+            animation: pulse-border 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-white font-sans antialiased overflow-x-hidden min-h-screen flex flex-col justify-between selection:bg-brand selection:text-white" onclick="triggerPopunder(event)">
+
+    <!-- Header Navigation -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-colors duration-300 px-4 md:px-12 py-4 flex items-center justify-between nav-gradient">
+        <div class="flex items-center space-x-8">
+            <!-- Brand Logo -->
+            <a href="#" class="text-brand font-black text-2xl md:text-3xl tracking-widest uppercase flex items-center gap-1 hover:opacity-90 transition">
+                <span>STREAMFLIX</span>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex space-x-5 text-sm font-medium text-gray-300">
+                <a href="#" onclick="filterCategory('all')" class="hover:text-white transition font-bold text-white nav-link" id="nav-all">Beranda</a>
+                <a href="#" onclick="filterCategory('series')" class="hover:text-white transition nav-link" id="nav-series">Serial TV</a>
+                <a href="#" onclick="filterCategory('movie')" class="hover:text-white transition nav-link" id="nav-movie">Film</a>
+                <a href="#" onclick="filterCategory('trending')" class="hover:text-white transition nav-link" id="nav-trending">Terbaru & Populer</a>
+                <a href="#" onclick="showMyListOnly()" class="hover:text-white transition nav-link" id="nav-mylist">Daftar Saya (<span id="my-list-count">0</span>)</a>
+                <a href="#" onclick="openSmartlink(event)" class="text-yellow-400 font-bold hover:underline transition flex items-center gap-1">
+                    <i class="fa-solid fa-fire text-xs"></i> Promo Spesial
+                </a>
+            </nav>
+        </div>
+
+        <!-- Right Menu (Search, User Profile) -->
+        <div class="flex items-center space-x-4">
+            <!-- Search Box -->
+            <div class="relative flex items-center">
+                <div id="search-container" class="flex items-center bg-black/60 border border-gray-700 rounded-full px-3 py-1.5 transition-all duration-300 focus-within:border-gray-400">
+                    <i class="fa-solid fa-magnifying-glass text-gray-400 text-sm mr-2 cursor-pointer" onclick="toggleSearchInput()"></i>
+                    <input type="text" id="search-input" onkeyup="handleSearch()" placeholder="Judul, genre, aktor..." class="bg-transparent text-xs md:text-sm text-white focus:outline-none w-28 md:w-48 placeholder-gray-500">
+                    <button id="clear-search" onclick="clearSearch()" class="hidden text-gray-400 hover:text-white text-xs ml-1">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Profile Dropdown -->
+            <div class="relative group">
+                <button class="flex items-center space-x-2 focus:outline-none">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="User Profile" class="w-8 h-8 rounded object-cover border border-gray-600">
+                    <i class="fa-solid fa-caret-down text-xs text-gray-400 group-hover:rotate-180 transition-transform"></i>
+                </button>
+                <div class="absolute right-0 mt-2 w-48 bg-cardBg rounded-md shadow-2xl py-2 border border-gray-800 hidden group-hover:block z-50">
+                    <div class="px-4 py-2 border-b border-gray-800 flex items-center space-x-3">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" class="w-7 h-7 rounded">
+                        <span class="text-sm font-semibold truncate">Pengguna Premium</span>
+                    </div>
+                    <a href="#" class="block px-4 py-2 text-xs text-gray-300 hover:bg-gray-800 hover:text-white"><i class="fa-solid fa-user mr-2"></i> Akun Saya</a>
+                    <a href="#" class="block px-4 py-2 text-xs text-gray-300 hover:bg-gray-800 hover:text-white"><i class="fa-solid fa-circle-question mr-2"></i> Pusat Bantuan</a>
+                    <div class="border-t border-gray-800 my-1"></div>
+                    <a href="#" class="block px-4 py-2 text-xs font-semibold text-brand hover:bg-gray-800"><i class="fa-solid fa-right-from-bracket mr-2"></i> Keluar dari Streamflix</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Wrapper -->
+    <main class="flex-grow pb-16">
+        
+        <!-- Search Results Banner Header (Only visible when searching) -->
+        <div id="search-header" class="hidden pt-24 px-4 md:px-12 mb-4">
+            <h2 class="text-xl md:text-2xl font-semibold text-gray-300">Hasil Pencarian untuk: <span id="search-keyword" class="text-white font-bold italic"></span></h2>
+        </div>
+
+        <!-- HERO BANNER SECTION -->
+        <section id="hero-section" class="relative w-full h-[70vh] md:h-[85vh] flex items-end pb-12 md:pb-24 px-4 md:px-12 bg-cover bg-center transition-all duration-700" style="background-image: url('https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?auto=format&fit=crop&w=1920&q=80');">
+            <!-- Gradient Overlay -->
+            <div class="absolute inset-0 hero-gradient"></div>
+
+            <!-- Hero Content -->
+            <div class="relative z-10 max-w-2xl space-y-3 md:space-y-4">
+                <div class="flex items-center space-x-2">
+                    <span class="bg-brand text-white text-[10px] md:text-xs font-black tracking-widest px-2 py-0.5 rounded uppercase">SERIES TOP 1</span>
+                    <span class="text-xs text-gray-300 font-semibold"><i class="fa-solid fa-star text-yellow-400 mr-1"></i>9.6 / 10</span>
+                </div>
+                <h1 id="hero-title" class="text-3xl md:text-6xl font-extrabold tracking-tight text-white drop-shadow-md">
+                    CYBER PULSE 2088
+                </h1>
+                <p id="hero-desc" class="text-xs md:text-base text-gray-300 line-clamp-3 md:line-clamp-4 leading-relaxed max-w-xl drop-shadow">
+                    Di masa depan dystopian Neo-Jakarta, seorang hacker lepas bertaruh dengan nyawa saat menemukan konspirasi korporat yang dapat mengontrol pikiran jutaan penduduk kota.
+                </p>
+                
+                <!-- Action Buttons -->
+                <div class="flex items-center space-x-3 pt-2">
+                    <button onclick="playVideo('CYBER PULSE 2088', 'https://trbnvideo.live/e/vilVUzaF')" class="flex items-center justify-center space-x-2 bg-white hover:bg-gray-200 text-black font-bold px-6 py-2.5 md:py-3 rounded transition shadow-lg text-sm md:text-base">
+                        <i class="fa-solid fa-play text-lg"></i>
+                        <span>Putar</span>
+                    </button>
+                    <button onclick="openDetailModal(heroMediaData)" class="flex items-center justify-center space-x-2 bg-gray-500/60 hover:bg-gray-500/40 text-white font-semibold px-5 py-2.5 md:py-3 rounded transition backdrop-blur-md text-sm md:text-base">
+                        <i class="fa-solid fa-circle-info text-lg"></i>
+                        <span>Informasi Selengkapnya</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROWS CONTAINER -->
+        <div id="rows-container" class="space-y-8 md:space-y-12 -mt-16 md:-mt-24 relative z-20 px-4 md:px-12">
+            
+            <!-- Row 1: Sedang Tren -->
+            <div class="category-row">
+                <h2 class="text-lg md:text-2xl font-bold mb-3 flex items-center text-white tracking-wide">
+                    <span class="w-1 h-5 bg-brand mr-2 rounded-full"></span>Sedang Tren Sekarang
+                </h2>
+                <div class="relative group">
+                    <div id="row-trending" class="flex space-x-4 overflow-x-auto no-scrollbar scroll-smooth py-4 px-1">
+                        <!-- Cards will be populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2: Film Terpopuler -->
+            <div class="category-row">
+                <h2 class="text-lg md:text-2xl font-bold mb-3 flex items-center text-white tracking-wide">
+                    <span class="w-1 h-5 bg-brand mr-2 rounded-full"></span>Film Blockbuster Pilihan
+                </h2>
+                <div class="relative group">
+                    <div id="row-movies" class="flex space-x-4 overflow-x-auto no-scrollbar scroll-smooth py-4 px-1">
+                        <!-- Cards will be populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 3: Serial TV -->
+            <div class="category-row">
+                <h2 class="text-lg md:text-2xl font-bold mb-3 flex items-center text-white tracking-wide">
+                    <span class="w-1 h-5 bg-brand mr-2 rounded-full"></span>Serial TV Wajib Tonton
+                </h2>
+                <div class="relative group">
+                    <div id="row-series" class="flex space-x-4 overflow-x-auto no-scrollbar scroll-smooth py-4 px-1">
+                        <!-- Cards will be populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 4: Daftar Saya -->
+            <div id="my-list-section" class="category-row">
+                <h2 class="text-lg md:text-2xl font-bold mb-3 flex items-center text-white tracking-wide">
+                    <span class="w-1 h-5 bg-brand mr-2 rounded-full"></span>Daftar Tontonan Saya
+                </h2>
+                <div class="relative group">
+                    <div id="row-mylist" class="flex space-x-4 overflow-x-auto no-scrollbar scroll-smooth py-4 px-1">
+                        <!-- Empty State / Dynamically populated -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-black/80 text-gray-500 text-xs md:text-sm py-8 px-4 md:px-12 border-t border-gray-900">
+        <div class="max-w-5xl mx-auto space-y-4">
+            <div class="flex space-x-6 text-gray-400 text-lg mb-4">
+                <a href="#" class="hover:text-white"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-white"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-white"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" class="hover:text-white"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="#" class="hover:underline">Audios dan Subtitle</a>
+                <a href="#" class="hover:underline">Pusat Bantuan</a>
+                <a href="#" class="hover:underline">Kartu Hadiah</a>
+                <a href="#" class="hover:underline">Hubungan Investor</a>
+                <a href="#" class="hover:underline">Karir</a>
+                <a href="#" class="hover:underline">Ketentuan Penggunaan</a>
+                <a href="#" class="hover:underline">Privasi</a>
+                <a href="#" class="hover:underline">Informasi Perusahaan</a>
+            </div>
+            <p class="pt-4 text-gray-600">© 2026 STREAMFLIX Indonesia. Dibuat untuk tujuan demonstrasi responsif UI/UX.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL DETAIL FILM/SERIES -->
+    <div id="detail-modal" class="fixed inset-0 z-50 bg-black/80 flex justify-center items-center p-2 md:p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-cardBg w-full max-w-3xl rounded-xl overflow-hidden shadow-2xl relative border border-gray-800 max-h-[90vh] flex flex-col transform scale-95 transition-transform duration-300" id="detail-modal-content">
+            
+            <!-- Close Button -->
+            <button onclick="closeDetailModal()" class="absolute top-4 right-4 z-20 bg-black/70 hover:bg-black text-white w-9 h-9 rounded-full flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Modal Header Image/Banner -->
+            <div class="relative h-64 md:h-80 bg-cover bg-center flex items-end p-6" id="modal-banner">
+                <div class="absolute inset-0 bg-gradient-to-t from-cardBg via-transparent to-black/30"></div>
+                <div class="relative z-10 space-y-3">
+                    <h3 id="modal-title" class="text-2xl md:text-4xl font-black text-white drop-shadow-md"></h3>
+                    <div class="flex items-center space-x-3">
+                        <button id="modal-play-btn" class="bg-white hover:bg-gray-200 text-black px-6 py-2 rounded-md font-bold flex items-center space-x-2 text-sm shadow">
+                            <i class="fa-solid fa-play"></i>
+                            <span>Putar</span>
+                        </button>
+                        <button id="modal-mylist-btn" onclick="toggleMyListFromModal()" class="w-10 h-10 border border-gray-400 hover:border-white rounded-full flex items-center justify-center bg-black/40 text-white transition">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Body Info -->
+            <div class="p-6 overflow-y-auto space-y-4 text-gray-300 text-sm">
+                <div class="flex flex-wrap items-center gap-3 text-xs md:text-sm">
+                    <span id="modal-match" class="text-green-400 font-bold">98% Cocok</span>
+                    <span id="modal-year" class="text-gray-400">2024</span>
+                    <span id="modal-rating" class="border border-gray-500 text-gray-300 px-1.5 py-0.5 rounded text-[10px]">16+</span>
+                    <span id="modal-duration" class="text-gray-400">2j 15m</span>
+                    <span id="modal-quality" class="border border-gray-600 text-white px-1 text-[10px] rounded font-semibold">HD</span>
+                </div>
+
+                <p id="modal-desc" class="text-gray-300 leading-relaxed text-sm md:text-base"></p>
+
+                <div class="pt-4 border-t border-gray-800 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+                    <div>
+                        <span class="text-gray-500">Pemeran:</span>
+                        <span id="modal-cast" class="text-gray-300">Aktor Utama, Aktris Populer, Bintang Tamu</span>
+                    </div>
+                    <div>
+                        <span class="text-gray-500">Genre:</span>
+                        <span id="modal-genre" class="text-gray-300">Aksi, Sci-Fi, Drama</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EMBED VIDEO PLAYER MODAL -->
+    <div id="video-player-modal" class="fixed inset-0 z-50 bg-black flex flex-col justify-between hidden">
+        <!-- Video Header Controls -->
+        <div class="absolute top-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-b from-black/90 to-transparent flex justify-between items-center z-30">
+            <div class="flex items-center space-x-4">
+                <button onclick="closeVideoPlayer()" class="text-white hover:text-gray-300 text-2xl focus:outline-none">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </button>
+                <h2 id="player-title" class="text-white font-bold text-base md:text-xl truncate max-w-md">Memutar Video</h2>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button onclick="openSmartlink(event)" class="bg-brand text-white px-3 py-1 rounded text-xs font-semibold hover:bg-brandHover transition flex items-center gap-1">
+                    <i class="fa-solid fa-external-link text-[10px]"></i> VIP HD Stream
+                </button>
+            </div>
+        </div>
+
+        <!-- Embedded Video Container (Iframe) -->
+        <div class="relative w-full h-full flex items-center justify-center bg-black pt-12">
+            <iframe id="main-embed-iframe" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- FLOATING VIDEO POPUP WIDGET (4x Repeat, Smartlink Close 'X') -->
+    <div id="floating-popup" class="fixed bottom-4 right-4 z-50 w-72 md:w-80 bg-cardBg border-2 border-brand rounded-xl shadow-2xl overflow-hidden hidden pulse-ad transition-all duration-300">
+        <!-- Banner & Close Bar -->
+        <div class="bg-black/90 px-3 py-1.5 flex items-center justify-between border-b border-gray-800">
+            <div class="flex items-center space-x-2">
+                <span class="w-2 h-2 rounded-full bg-red-600 animate-ping"></span>
+                <span class="text-[11px] font-bold text-yellow-400 tracking-wider uppercase">Sponsor Live Preview</span>
+            </div>
+            
+            <!-- Close Button (X) - Always opens SmartLink -->
+            <button onclick="closeFloatingPopupWithSmartlink(event)" class="text-gray-400 hover:text-white bg-gray-800 hover:bg-brand w-6 h-6 rounded-full flex items-center justify-center transition focus:outline-none" title="Tutup">
+                <i class="fa-solid fa-xmark text-xs"></i>
+            </button>
+        </div>
+
+        <!-- Video Player Body -->
+        <div class="relative h-44 bg-black">
+            <iframe id="floating-video-iframe" class="w-full h-full border-0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            
+            <!-- Clickable Smartlink Overlay Area -->
+            <div onclick="openSmartlink(event)" class="absolute inset-0 bg-transparent cursor-pointer z-10" title="Klik untuk nonton versi lengkap"></div>
+        </div>
+
+        <!-- Floating Footer Call to Action -->
+        <div onclick="openSmartlink(event)" class="bg-gradient-to-r from-brand to-red-800 p-2.5 text-center cursor-pointer hover:brightness-110 transition flex items-center justify-between px-4">
+            <span class="text-xs font-bold text-white uppercase tracking-wide">Tonton Bebas Iklan Sekarang</span>
+            <i class="fa-solid fa-chevron-right text-xs text-white"></i>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 left-6 z-50 bg-brand text-white px-5 py-3 rounded-lg shadow-xl flex items-center space-x-3 transform translate-y-20 opacity-0 transition-all duration-300">
+        <i class="fa-solid fa-circle-check text-xl"></i>
+        <span id="toast-message" class="text-sm font-semibold">Pesan Notifikasi</span>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // DATA MASTER CATALOG FILM & SERIAL (23 MEDIA COMPLETE DENGAN URL TRBNVIDEO)
+        const mediaDatabase = [
+            {
+                id: 'm1',
+                title: 'CYBER PULSE 2088',
+                category: 'series',
+                trending: true,
+                rating: '18+',
+                year: '2025',
+                duration: '1 Season',
+                match: '98%',
+                image: 'https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/vilVUzaF',
+                desc: 'Di masa depan dystopian Neo-Jakarta, seorang hacker lepas bertaruh dengan nyawa saat menemukan konspirasi korporat yang dapat mengontrol pikiran jutaan penduduk kota.',
+                cast: 'Reza Rahadian, Dian Sastrowardoyo',
+                genre: 'Sci-Fi, Aksion, Thriller'
+            },
+            {
+                id: 'm2',
+                title: 'LENTERA DI UJUNG MALAM',
+                category: 'movie',
+                trending: true,
+                rating: '13+',
+                year: '2024',
+                duration: '2j 04m',
+                match: '95%',
+                image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/ro2CMgLR',
+                desc: 'Kisah romantis haru tentang seorang pelukis tunarungu yang menemukan kembali inspirasi hidupnya setelah bertemu wartawan foto legendaris.',
+                cast: 'Nicholas Saputra, Amanda Manopo',
+                genre: 'Drama, Romantis'
+            },
+            {
+                id: 'm3',
+                title: 'THE DARK REALM',
+                category: 'movie',
+                trending: false,
+                rating: '18+',
+                year: '2023',
+                duration: '1j 55m',
+                match: '89%',
+                image: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/3BVKpohD',
+                desc: 'Petualangan fantasi gelap menjelajahi gerbang mistis kuno yang terbuka di pedalaman hutan Kalimantan.',
+                cast: 'Joe Taslim, Iko Uwais',
+                genre: 'Horor, Fantasi, Petualangan'
+            },
+            {
+                id: 'm4',
+                title: 'SPEED HORIZON',
+                category: 'movie',
+                trending: true,
+                rating: '13+',
+                year: '2024',
+                duration: '2j 10m',
+                match: '92%',
+                image: 'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/eYssmbB8',
+                desc: 'Aksi balap liar bawah tanah di sirkuit berbahaya perkotaan, di mana persahabatan dan pengkhianatan diuji.',
+                cast: 'Vino G. Bastian, Chicco Jerikho',
+                genre: 'Aksi, Balap, Kriminal'
+            },
+            {
+                id: 'm5',
+                title: 'KEDAI KOPI KHAYALAN',
+                category: 'series',
+                trending: false,
+                rating: 'SU',
+                year: '2023',
+                duration: '2 Season',
+                match: '96%',
+                image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/g7zrmyTR',
+                desc: 'Sebuah kafe unik yang hanya buka saat tengah malam memberikan kesempatan bagi pengunjung untuk berbincang dengan masa lalu mereka.',
+                cast: 'Sutra Rahma, Adipati Dolken',
+                genre: 'Komedi, Drama, Slice of Life'
+            },
+            {
+                id: 'm6',
+                title: 'JEJAK SANG MAESTRO',
+                category: 'series',
+                trending: true,
+                rating: '13+',
+                year: '2024',
+                duration: '1 Season',
+                match: '94%',
+                image: 'https://images.unsplash.com/photo-1460723237483-7a6dc9d0b212?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/IP5pBKZm',
+                desc: 'Dokumenter mendalam mengungkap rahasia para desainer dan seniman legendaris Indonesia dalam mengubah lanskap budaya.',
+                cast: 'Dokumenter / Berbagai Tokoh',
+                genre: 'Dokumenter, Seni'
+            },
+            {
+                id: 'm7',
+                title: 'EXPEDITION MARS 2090',
+                category: 'movie',
+                trending: false,
+                rating: '13+',
+                year: '2025',
+                duration: '2j 25m',
+                match: '91%',
+                image: 'https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/3AhEUqm9',
+                desc: 'Misi luar angkasa pertama manusia ke Mars menghadapi krisis ekstrim ketika badai radiasi menghancurkan komunikasi bumi.',
+                cast: 'Ario Bayu, Tara Basro',
+                genre: 'Sci-Fi, Petualangan'
+            },
+            {
+                id: 'm8',
+                title: 'BAYANG-BAYANG DETEKTIF',
+                category: 'series',
+                trending: false,
+                rating: '16+',
+                year: '2024',
+                duration: '3 Season',
+                match: '97%',
+                image: 'https://images.unsplash.com/photo-1453728013993-6d66e9c9123a?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/kbj3gGVu',
+                desc: 'Seorang detektif veteran memecahkan serangkaian misteri rumit yang melibatkan elit politik kota.',
+                cast: 'Lukman Sardi, Slamet Rahardjo',
+                genre: 'Misteri, Kriminal, Drama'
+            },
+            {
+                id: 'm9',
+                title: 'SHADOW OF THE NINJA',
+                category: 'movie',
+                trending: true,
+                rating: '18+',
+                year: '2025',
+                duration: '1j 48m',
+                match: '97%',
+                image: 'https://images.unsplash.com/photo-1514539079130-25950c84af65?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/dAoWXT6H',
+                desc: 'Seorang prajurit bayangan bertekad membalas dendam pada klan bangsawan yang telah mengkhianati tanah kelahirannya.',
+                cast: 'Yayan Ruhian, Hannah Al Rashid',
+                genre: 'Aksi, Historis, Laga'
+            },
+            {
+                id: 'm10',
+                title: 'KOTA TANPA BINTANG',
+                category: 'series',
+                trending: true,
+                rating: '16+',
+                year: '2024',
+                duration: '2 Season',
+                match: '93%',
+                image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/hZrJE3ag',
+                desc: 'Konflik sengit antar gang jalanan dalam memperebutkan wilayah kekuasaan di pusat metropolis yang remang-remang.',
+                cast: 'Abimana Aryasatya, Rio Dewanto',
+                genre: 'Kriminal, Action, Drama'
+            },
+            {
+                id: 'm11',
+                title: 'RAHASIA SAMUDRA',
+                category: 'movie',
+                trending: false,
+                rating: 'SU',
+                year: '2023',
+                duration: '1j 42m',
+                match: '90%',
+                image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/oXSea8O3',
+                desc: 'Peneliti kelautan menemukan ekosistem purba raksasa di dasar Palung Jawa yang memegang kunci kelangsungan planet.',
+                cast: 'Prisia Nasution, Arifin Putra',
+                genre: 'Dokumenter, Sci-Fi, Petualangan'
+            },
+            {
+                id: 'm12',
+                title: 'MELODI CINTA TERAKHIR',
+                category: 'movie',
+                trending: false,
+                rating: '13+',
+                year: '2024',
+                duration: '2j 01m',
+                match: '94%',
+                image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/OjskKLj9',
+                desc: 'Dua musisi berbakat berjuang menciptakan komposisi musik terindah sebelum penyakit langka memisahkan mereka.',
+                cast: 'Pevita Pearce, Iqbaal Ramadhan',
+                genre: 'Drama, Romantis, Musik'
+            },
+            {
+                id: 'm13',
+                title: 'HANTU DESA PENARI',
+                category: 'movie',
+                trending: true,
+                rating: '18+',
+                year: '2025',
+                duration: '1j 58m',
+                match: '96%',
+                image: 'https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/Md85NYFy',
+                desc: 'Sekelompok mahasiswa KKN terperangkap dalam ritual gaib mistis di pelosok desa terpencil yang terisolasi.',
+                cast: 'Aghniny Haque, Mikha Tambayong',
+                genre: 'Horor, Misteri, Thriller'
+            },
+            {
+                id: 'm14',
+                title: 'ACADEMY OF MAGIC',
+                category: 'series',
+                trending: true,
+                rating: '13+',
+                year: '2024',
+                duration: '1 Season',
+                match: '95%',
+                image: 'https://images.unsplash.com/photo-1514533450685-4493e01d1fdc?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/vf7Tr5PX',
+                desc: 'Para remaja berbakat mengasah kekuatan elemental di sekolah sihir tersembunyi demi mengalahkan ancaman kegelapan.',
+                cast: 'Caitlin Halderman, Jefri Nichol',
+                genre: 'Fantasi, Petualangan, Remaja'
+            },
+            {
+                id: 'm15',
+                title: 'PEMBURU BURONAN',
+                category: 'movie',
+                trending: false,
+                rating: '16+',
+                year: '2023',
+                duration: '1j 50m',
+                match: '88%',
+                image: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/P9u8IcSv',
+                desc: 'Mantan agen rahasia memburu kelompok kriminal internasional yang mencuri senjata rahasia militer.',
+                cast: 'Donny Alamsyah, Tio Pakusadewo',
+                genre: 'Aksi, Kriminal, Thriller'
+            },
+            {
+                id: 'm16',
+                title: 'KULINER NUSANTARA',
+                category: 'series',
+                trending: false,
+                rating: 'SU',
+                year: '2024',
+                duration: '3 Season',
+                match: '99%',
+                image: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/6XSeoiLE',
+                desc: 'Penjelajahan rasa dan rahasia warisan bumbu rempah leluhur di berbagai pelosok daerah Indonesia.',
+                cast: 'Chef Juna, Chef Renatta',
+                genre: 'Dokumenter, Kuliner, Realitas'
+            },
+            {
+                id: 'm17',
+                title: 'GALAKSI PARALEL',
+                category: 'series',
+                trending: true,
+                rating: '13+',
+                year: '2025',
+                duration: '1 Season',
+                match: '92%',
+                image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/3jo5jo1C',
+                desc: 'Sebuah eksperimen fisika kuantum yang gagal membuka portal dimensi sejajar dengan versi kehidupan alternatif.',
+                cast: 'Reza Rahadian, Tatjana Saphira',
+                genre: 'Sci-Fi, Misteri, Drama'
+            },
+            {
+                id: 'm18',
+                title: 'TAWA DI KELAS 3B',
+                category: 'series',
+                trending: false,
+                rating: 'SU',
+                year: '2023',
+                duration: '2 Season',
+                match: '91%',
+                image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/60KkM4rb',
+                desc: 'Tingkah konyol dan kocak sekelompok siswa SMA dalam menghadapi ujian akhir sekolah dan percintaan remaja.',
+                cast: 'Baskara Mahendra, Syifa Hadju',
+                genre: 'Komedi, Remaja, Sekolah'
+            },
+            {
+                id: 'm19',
+                title: 'PERANG BINTANG: KEBANGKITAN',
+                category: 'movie',
+                trending: true,
+                rating: '13+',
+                year: '2025',
+                duration: '2j 30m',
+                match: '97%',
+                image: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/Vh4mz5eA',
+                desc: 'Pertempuran antariksa terbesar abad ini untuk mempertahankan kehancuran armada planet induk.',
+                cast: 'Ario Bayu, Julie Estelle',
+                genre: 'Sci-Fi, Aksion, Petualangan'
+            },
+            {
+                id: 'm20',
+                title: 'RUMAH DI ATAS AWAN',
+                category: 'movie',
+                trending: false,
+                rating: 'SU',
+                year: '2024',
+                duration: '1j 35m',
+                match: '93%',
+                image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/tLCwUAne',
+                desc: 'Kisah inspiratif seorang anak pegunungan yang bermimpi membangun perpustakaan pertama di desanya.',
+                cast: 'Muzakki Ramdhan, Nirina Zubir',
+                genre: 'Keluarga, Drama, Inspiratif'
+            },
+            {
+                id: 'm21',
+                title: 'DETEKSI LIES',
+                category: 'series',
+                trending: false,
+                rating: '16+',
+                year: '2024',
+                duration: '1 Season',
+                match: '89%',
+                image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/bzi6YPaC',
+                desc: 'Pakar kebohongan dan psikolog forensik bekerjasama dengan kepolisian untuk membongkar kasus manipulasi kejahatan.',
+                cast: 'Lukman Sardi, Marissa Anita',
+                genre: 'Kriminal, Psikologis, Drama'
+            },
+            {
+                id: 'm22',
+                title: 'AMBISI TANPA BATAS',
+                category: 'movie',
+                trending: false,
+                rating: '16+',
+                year: '2023',
+                duration: '2j 08m',
+                match: '90%',
+                image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/WogIBwDB',
+                desc: 'Persaingan kejam dan skandal korporasi di balik industri startup bernilai miliaran dolar.',
+                cast: 'Chicco Jerikho, Morgan Oey',
+                genre: 'Drama, Bisnis, Thriller'
+            },
+            {
+                id: 'm23',
+                title: 'ISLAND OF SURVIVAL',
+                category: 'movie',
+                trending: true,
+                rating: '16+',
+                year: '2025',
+                duration: '1j 52m',
+                match: '94%',
+                image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80',
+                videoUrl: 'https://trbnvideo.live/e/vyyUCenC',
+                desc: 'Penyintas kecelakaan pesawat bertahan hidup di pulau terpencil sambil menghadapi ancaman hewan buas dan cuaca ekstrem.',
+                cast: 'Iko Uwais, Kelly Tandiono',
+                genre: 'Aksi, Petualangan, Survival'
+            }
+        ];
+
+        // FLOATING POPUP & POPUNDER MONETIZATION LOGIC
+        let hasTriggeredPopunder = false;
+        let floatingShowCount = 0;
+        let floatingTimer = null;
+
+        function triggerPopunder(event) {
+            if (window.CONFIG.ENABLE_POPUNDER && !hasTriggeredPopunder) {
+                const target = event.target;
+                if (target.closest('button') || target.closest('a') || target.closest('input')) {
+                    window.open(window.CONFIG.SMARTLINK_URL, '_blank');
+                    hasTriggeredPopunder = true;
+                }
+            }
+        }
+
+        function openSmartlink(event) {
+            if (event) event.stopPropagation();
+            window.open(window.CONFIG.SMARTLINK_URL, '_blank');
+        }
+
+        function initFloatingPopup() {
+            scheduleFloatingPopup(2000); 
+        }
+
+        function scheduleFloatingPopup(delayMs) {
+            if (floatingShowCount >= window.CONFIG.FLOATING_REPEAT_COUNT) return;
+
+            floatingTimer = setTimeout(() => {
+                showFloatingPopup();
+            }, delayMs);
+        }
+
+        function showFloatingPopup() {
+            if (floatingShowCount >= window.CONFIG.FLOATING_REPEAT_COUNT) return;
+
+            floatingShowCount++;
+            const popup = document.getElementById('floating-popup');
+            const iframe = document.getElementById('floating-video-iframe');
+
+            // Menggunakan link video pertama untuk floating popup preview
+            iframe.src = 'https://trbnvideo.live/e/vilVUzaF';
+            popup.classList.remove('hidden');
+        }
+
+        function closeFloatingPopupWithSmartlink(event) {
+            if (event) event.stopPropagation();
+
+            openSmartlink(event);
+
+            const popup = document.getElementById('floating-popup');
+            const iframe = document.getElementById('floating-video-iframe');
+            popup.classList.add('hidden');
+            iframe.src = '';
+
+            if (floatingShowCount < window.CONFIG.FLOATING_REPEAT_COUNT) {
+                showToast(`Iklan ditutup. Re-appear ke-${floatingShowCount + 1} dalam ${window.CONFIG.FLOATING_DELAY_SECONDS}d`);
+                scheduleFloatingPopup(window.CONFIG.FLOATING_DELAY_SECONDS * 1000);
+            }
+        }
+
+        // State Management
+        let myList = JSON.parse(localStorage.getItem('streamflix_mylist')) || [];
+        let activeMediaForModal = null;
+        const heroMediaData = mediaDatabase[0];
+
+        // INITIALIZATION
+        window.onload = () => {
+            renderAllRows();
+            updateMyListBadge();
+            initFloatingPopup();
+
+            window.addEventListener('scroll', () => {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('bg-black');
+                    navbar.classList.remove('nav-gradient');
+                } else {
+                    navbar.classList.remove('bg-black');
+                    navbar.classList.add('nav-gradient');
+                }
+            });
+        };
+
+        // RENDER CARDS TO ROWS
+        function renderAllRows() {
+            renderRow('row-trending', mediaDatabase.filter(m => m.trending));
+            renderRow('row-movies', mediaDatabase.filter(m => m.category === 'movie'));
+            renderRow('row-series', mediaDatabase.filter(m => m.category === 'series'));
+            renderMyListRow();
+        }
+
+        function createCardHTML(item) {
+            const isSaved = myList.some(m => m.id === item.id);
+            return `
+                <div class="movie-card flex-none w-44 md:w-60 bg-cardBg rounded-md overflow-hidden relative cursor-pointer group">
+                    <img src="${item.image}" alt="${item.title}" class="w-full h-28 md:h-36 object-cover" onclick="playVideo('${item.title}', '${item.videoUrl}')" title="Klik untuk memutar film">
+                    
+                    <div class="p-3 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-bold text-xs md:text-sm text-white truncate w-32 md:w-40 cursor-pointer" onclick="openDetailModalById('${item.id}')" title="Klik untuk info detail">${item.title}</h4>
+                            <span class="text-[10px] text-green-400 font-semibold">${item.match}</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-1 border-t border-gray-800">
+                            <div class="flex items-center space-x-1.5 text-[10px] text-gray-400">
+                                <span class="border border-gray-600 px-1 rounded">${item.rating}</span>
+                                <span>${item.duration}</span>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button onclick="event.stopPropagation(); playVideo('${item.title}', '${item.videoUrl}')" class="w-7 h-7 rounded-full bg-white text-black flex items-center justify-center hover:bg-brand hover:text-white transition shadow" title="Putar Video">
+                                    <i class="fa-solid fa-play text-xs ml-0.5"></i>
+                                </button>
+                                <button onclick="event.stopPropagation(); toggleMyList('${item.id}')" class="w-7 h-7 rounded-full border border-gray-500 flex items-center justify-center hover:border-white text-white transition" title="Daftar Saya">
+                                    <i class="fa-solid ${isSaved ? 'fa-check text-green-400' : 'fa-plus'} text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderRow(elementId, items) {
+            const container = document.getElementById(elementId);
+            if (!container) return;
+            if (items.length === 0) {
+                container.innerHTML = `<p class="text-xs text-gray-500 py-4">Tidak ada konten tersedia.</p>`;
+                return;
+            }
+            container.innerHTML = items.map(item => createCardHTML(item)).join('');
+        }
+
+        function renderMyListRow() {
+            const container = document.getElementById('row-mylist');
+            if (myList.length === 0) {
+                container.innerHTML = `
+                    <div class="py-6 px-4 text-center w-full bg-black/30 rounded-lg border border-gray-800">
+                        <p class="text-gray-400 text-xs md:text-sm">Daftar favorit Anda masih kosong.</p>
+                        <p class="text-gray-600 text-xs mt-1">Klik ikon (+) pada film atau drama untuk menyimpannya di sini.</p>
+                    </div>
+                `;
+                return;
+            }
+            container.innerHTML = myList.map(item => createCardHTML(item)).join('');
+        }
+
+        // FAVORITE / MY LIST MANAGEMENT
+        function toggleMyList(mediaId) {
+            const item = mediaDatabase.find(m => m.id === mediaId);
+            if (!item) return;
+
+            const index = myList.findIndex(m => m.id === mediaId);
+            if (index > -1) {
+                myList.splice(index, 1);
+                showToast(`"${item.title}" dihapus dari Daftar Saya`);
+            } else {
+                myList.push(item);
+                showToast(`"${item.title}" ditambahkan ke Daftar Saya`);
+            }
+
+            localStorage.setItem('streamflix_mylist', JSON.stringify(myList));
+            updateMyListBadge();
+            renderAllRows();
+
+            if (activeMediaForModal && activeMediaForModal.id === mediaId) {
+                updateModalMyListBtn(mediaId);
+            }
+        }
+
+        function toggleMyListFromModal() {
+            if (activeMediaForModal) {
+                toggleMyList(activeMediaForModal.id);
+            }
+        }
+
+        function updateMyListBadge() {
+            document.getElementById('my-list-count').innerText = myList.length;
+        }
+
+        // DETAIL MODAL LOGIC
+        function openDetailModalById(id) {
+            const media = mediaDatabase.find(m => m.id === id);
+            if (media) openDetailModal(media);
+        }
+
+        function openDetailModal(media) {
+            activeMediaForModal = media;
+            const modal = document.getElementById('detail-modal');
+            const content = document.getElementById('detail-modal-content');
+
+            document.getElementById('modal-banner').style.backgroundImage = `url('${media.image}')`;
+            document.getElementById('modal-title').innerText = media.title;
+            document.getElementById('modal-desc').innerText = media.desc;
+            document.getElementById('modal-match').innerText = `${media.match} Cocok`;
+            document.getElementById('modal-year').innerText = media.year;
+            document.getElementById('modal-rating').innerText = media.rating;
+            document.getElementById('modal-duration').innerText = media.duration;
+            document.getElementById('modal-cast').innerText = media.cast;
+            document.getElementById('modal-genre').innerText = media.genre;
+
+            document.getElementById('modal-play-btn').onclick = () => {
+                closeDetailModal();
+                playVideo(media.title, media.videoUrl);
+            };
+
+            updateModalMyListBtn(media.id);
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+        }
+
+        function updateModalMyListBtn(id) {
+            const isSaved = myList.some(m => m.id === id);
+            const btn = document.getElementById('modal-mylist-btn');
+            btn.innerHTML = `<i class="fa-solid ${isSaved ? 'fa-check text-green-400' : 'fa-plus'}"></i>`;
+        }
+
+        function closeDetailModal() {
+            const modal = document.getElementById('detail-modal');
+            const content = document.getElementById('detail-modal-content');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+        }
+
+        // CATEGORY & SEARCH FILTERING
+        function filterCategory(category) {
+            const heroSection = document.getElementById('hero-section');
+            const searchHeader = document.getElementById('search-header');
+            searchHeader.classList.add('hidden');
+
+            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('font-bold', 'text-white'));
+            const activeNav = document.getElementById(`nav-${category}`);
+            if (activeNav) activeNav.classList.add('font-bold', 'text-white');
+
+            if (category === 'all') {
+                heroSection.style.display = 'flex';
+                renderAllRows();
+            } else if (category === 'trending') {
+                heroSection.style.display = 'none';
+                renderRow('row-trending', mediaDatabase.filter(m => m.trending));
+                renderRow('row-movies', []);
+                renderRow('row-series', []);
+                renderRow('row-mylist', []);
+            } else {
+                heroSection.style.display = 'none';
+                const filtered = mediaDatabase.filter(m => m.category === category);
+                renderRow('row-trending', filtered);
+                renderRow('row-movies', []);
+                renderRow('row-series', []);
+                renderRow('row-mylist', []);
+            }
+        }
+
+        function showMyListOnly() {
+            document.getElementById('hero-section').style.display = 'none';
+            document.getElementById('search-header').classList.add('hidden');
+            renderRow('row-trending', []);
+            renderRow('row-movies', []);
+            renderRow('row-series', []);
+            renderMyListRow();
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            const clearBtn = document.getElementById('clear-search');
+            const searchHeader = document.getElementById('search-header');
+            const searchKeyword = document.getElementById('search-keyword');
+            const heroSection = document.getElementById('hero-section');
+
+            if (query.length > 0) {
+                clearBtn.classList.remove('hidden');
+                searchHeader.classList.remove('hidden');
+                searchKeyword.innerText = query;
+                heroSection.style.display = 'none';
+
+                const results = mediaDatabase.filter(item => 
+                    item.title.toLowerCase().includes(query) || 
+                    item.genre.toLowerCase().includes(query) ||
+                    item.cast.toLowerCase().includes(query)
+                );
+
+                renderRow('row-trending', results);
+                renderRow('row-movies', []);
+                renderRow('row-series', []);
+                renderRow('row-mylist', []);
+            } else {
+                clearSearch();
+            }
+        }
+
+        function clearSearch() {
+            document.getElementById('search-input').value = '';
+            document.getElementById('clear-search').classList.add('hidden');
+            document.getElementById('search-header').classList.add('hidden');
+            document.getElementById('hero-section').style.display = 'flex';
+            renderAllRows();
+        }
+
+        // EMBEDDED VIDEO PLAYER LOGIC
+        const videoModal = document.getElementById('video-player-modal');
+        const mainEmbedIframe = document.getElementById('main-embed-iframe');
+
+        function playVideo(title, embedUrl) {
+            openSmartlink();
+
+            document.getElementById('player-title').innerText = title;
+            mainEmbedIframe.src = embedUrl;
+            videoModal.classList.remove('hidden');
+        }
+
+        function closeVideoPlayer() {
+            mainEmbedIframe.src = '';
+            videoModal.classList.add('hidden');
+        }
+
+        // TOAST NOTIFICATION UTILITY
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
