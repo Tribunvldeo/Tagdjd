@@ -59,23 +59,13 @@
             background: #555;
         }
 
-        /* Hide scrollbar for Chrome, Safari and Opera */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        /* Hide scrollbar for IE, Edge and Firefox */
-        .no-scrollbar {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
-
         .movie-card {
             transition: transform 0.3s ease, z-index 0.3s ease, box-shadow 0.3s ease;
         }
         
         .movie-card:hover {
-            transform: scale(1.18);
-            z-index: 40;
+            transform: translateY(-6px) scale(1.03);
+            z-index: 30;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.8), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
@@ -198,49 +188,45 @@
             
             <!-- Row 1: Sedang Tren -->
             <div class="category-row">
-                <h2 class="text-lg md:text-2xl font-bold mb-3 flex items-center text-white tracking-wide">
+                <h2 class="text-lg md:text-2xl font-bold mb-4 flex items-center text-white tracking-wide">
                     <span class="w-1 h-5 bg-brand mr-2 rounded-full"></span>Sedang Tren Sekarang
                 </h2>
-                <div class="relative group">
-                    <div id="row-trending" class="flex space-x-4 overflow-x-auto no-scrollbar scroll-smooth py-4 px-1">
-                        <!-- Cards will be populated by JS -->
-                    </div>
+                <!-- Grid Tampilan ke Bawah -->
+                <div id="row-trending" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    <!-- Cards will be populated by JS -->
                 </div>
             </div>
 
             <!-- Row 2: Film Terpopuler -->
             <div class="category-row">
-                <h2 class="text-lg md:text-2xl font-bold mb-3 flex items-center text-white tracking-wide">
+                <h2 class="text-lg md:text-2xl font-bold mb-4 flex items-center text-white tracking-wide">
                     <span class="w-1 h-5 bg-brand mr-2 rounded-full"></span>Film Blockbuster Pilihan
                 </h2>
-                <div class="relative group">
-                    <div id="row-movies" class="flex space-x-4 overflow-x-auto no-scrollbar scroll-smooth py-4 px-1">
-                        <!-- Cards will be populated by JS -->
-                    </div>
+                <!-- Grid Tampilan ke Bawah -->
+                <div id="row-movies" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    <!-- Cards will be populated by JS -->
                 </div>
             </div>
 
             <!-- Row 3: Serial TV -->
             <div class="category-row">
-                <h2 class="text-lg md:text-2xl font-bold mb-3 flex items-center text-white tracking-wide">
+                <h2 class="text-lg md:text-2xl font-bold mb-4 flex items-center text-white tracking-wide">
                     <span class="w-1 h-5 bg-brand mr-2 rounded-full"></span>Serial TV Wajib Tonton
                 </h2>
-                <div class="relative group">
-                    <div id="row-series" class="flex space-x-4 overflow-x-auto no-scrollbar scroll-smooth py-4 px-1">
-                        <!-- Cards will be populated by JS -->
-                    </div>
+                <!-- Grid Tampilan ke Bawah -->
+                <div id="row-series" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    <!-- Cards will be populated by JS -->
                 </div>
             </div>
 
             <!-- Row 4: Daftar Saya -->
             <div id="my-list-section" class="category-row">
-                <h2 class="text-lg md:text-2xl font-bold mb-3 flex items-center text-white tracking-wide">
+                <h2 class="text-lg md:text-2xl font-bold mb-4 flex items-center text-white tracking-wide">
                     <span class="w-1 h-5 bg-brand mr-2 rounded-full"></span>Daftar Tontonan Saya
                 </h2>
-                <div class="relative group">
-                    <div id="row-mylist" class="flex space-x-4 overflow-x-auto no-scrollbar scroll-smooth py-4 px-1">
-                        <!-- Empty State / Dynamically populated -->
-                    </div>
+                <!-- Grid Tampilan ke Bawah -->
+                <div id="row-mylist" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    <!-- Empty State / Dynamically populated -->
                 </div>
             </div>
 
@@ -826,15 +812,15 @@
         function createCardHTML(item) {
             const isSaved = myList.some(m => m.id === item.id);
             return `
-                <div class="movie-card flex-none w-44 md:w-60 bg-cardBg rounded-md overflow-hidden relative cursor-pointer group">
-                    <img src="${item.image}" alt="${item.title}" class="w-full h-28 md:h-36 object-cover" onclick="playVideo('${item.title}', '${item.videoUrl}')" title="Klik untuk memutar film">
+                <div class="movie-card w-full bg-cardBg rounded-md overflow-hidden relative cursor-pointer group flex flex-col justify-between">
+                    <img src="${item.image}" alt="${item.title}" class="w-full h-36 md:h-44 object-cover" onclick="playVideo('${item.title}', '${item.videoUrl}')" title="Klik untuk memutar film">
                     
-                    <div class="p-3 space-y-2">
-                        <div class="flex items-center justify-between">
-                            <h4 class="font-bold text-xs md:text-sm text-white truncate w-32 md:w-40 cursor-pointer" onclick="openDetailModalById('${item.id}')" title="Klik untuk info detail">${item.title}</h4>
-                            <span class="text-[10px] text-green-400 font-semibold">${item.match}</span>
+                    <div class="p-3 space-y-2 flex-grow flex flex-col justify-between">
+                        <div class="flex items-center justify-between gap-1">
+                            <h4 class="font-bold text-xs md:text-sm text-white truncate cursor-pointer" onclick="openDetailModalById('${item.id}')" title="Klik untuk info detail">${item.title}</h4>
+                            <span class="text-[10px] text-green-400 font-semibold flex-shrink-0">${item.match}</span>
                         </div>
-                        <div class="flex items-center justify-between pt-1 border-t border-gray-800">
+                        <div class="flex items-center justify-between pt-2 border-t border-gray-800">
                             <div class="flex items-center space-x-1.5 text-[10px] text-gray-400">
                                 <span class="border border-gray-600 px-1 rounded">${item.rating}</span>
                                 <span>${item.duration}</span>
@@ -857,7 +843,7 @@
             const container = document.getElementById(elementId);
             if (!container) return;
             if (items.length === 0) {
-                container.innerHTML = `<p class="text-xs text-gray-500 py-4">Tidak ada konten tersedia.</p>`;
+                container.innerHTML = `<p class="text-xs text-gray-500 py-4 col-span-full">Tidak ada konten tersedia.</p>`;
                 return;
             }
             container.innerHTML = items.map(item => createCardHTML(item)).join('');
@@ -867,7 +853,7 @@
             const container = document.getElementById('row-mylist');
             if (myList.length === 0) {
                 container.innerHTML = `
-                    <div class="py-6 px-4 text-center w-full bg-black/30 rounded-lg border border-gray-800">
+                    <div class="py-6 px-4 text-center w-full bg-black/30 rounded-lg border border-gray-800 col-span-full">
                         <p class="text-gray-400 text-xs md:text-sm">Daftar favorit Anda masih kosong.</p>
                         <p class="text-gray-600 text-xs mt-1">Klik ikon (+) pada film atau drama untuk menyimpannya di sini.</p>
                     </div>
