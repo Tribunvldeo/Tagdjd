@@ -1,748 +1,668 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DUNIA DEWASA Nonton Film & Serial TV</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts Plus Jakarta Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HUMSTER STREAM - Video Collection</title>
+<meta name="description" content="Discover the latest video collection.">
 
-    <!-- ⬇️ SKRIP IKLAN POPUNDER ANDA TELAH DIPASANG DI SINI ⬇️ -->
-    <script src="https://pl30627583.profitableratecpmnetwork.com/d5/60/79/d56079c7788bd3e1f5be8a617ee76745.js"></script>
+<style>
+:root{
+--bg:#0f172a;
+--panel:#1e293b;
+--card:#334155;
+--text:#f8fafc;
+--muted:#94a3b8;
+--accent:#06b6d4;
+--accent-hover:#0891b2;
+--secondary:#ec4899;
+}
+*{box-sizing:border-box}
+body{
+margin:0;background:var(--bg);
+color:var(--text);
+font-family:Arial,sans-serif;
+}
+a{text-decoration:none;color:inherit}
+header{
+background:#0f172a;
+border-bottom:1px solid #334155;
+position:sticky;top:0;z-index:20;
+}
+.topbar{
+max-width:1200px;margin:auto;padding:15px;
+display:flex;align-items:center;
+justify-content:space-between;flex-wrap:wrap;gap:15px;
+}
+.logo{font-size:23px;font-weight:bold;letter-spacing:0.5px}
+.logo span{color:var(--accent)}
+nav{display:flex;gap:18px;flex-wrap:wrap}
+nav a{font-size:13px;color:#cbd5e1;transition:.2s}
+nav a:hover{color:var(--accent)}
+.search-wrap{
+max-width:1200px;margin:auto;padding:0 15px 14px;
+}
+.search{
+width:100%;padding:13px;
+border:1px solid #334155;
+background:#1e293b;color:white;
+border-radius:7px;font-size:14px;outline:none;
+transition:.2s;
+}
+.search:focus{
+border-color:var(--accent);
+box-shadow:0 0 0 2px rgba(6,182,212,0.25);
+}
+.container{
+max-width:1200px;margin:auto;padding:18px 15px;
+}
+.category{
+display:flex;gap:9px;overflow-x:auto;
+padding:5px 0 18px;scrollbar-width:none;
+}
+.category a{
+white-space:nowrap;background:var(--panel);
+padding:10px 15px;border-radius:5px;
+font-size:13px;color:#cbd5e1;
+transition:.2s;
+}
+.category a.active,.category a:hover{
+background:var(--accent);color:#0f172a;font-weight:bold;
+}
+.section-title{
+font-size:19px;margin:15px 0;
+display:flex;justify-content:space-between;
+align-items:center;
+}
+.section-title small{
+font-size:12px;color:var(--muted);
+}
+.video-grid{
+display:grid;
+grid-template-columns:repeat(4,minmax(0,1fr));
+gap:16px;
+}
+.video-card{
+background:var(--card);border-radius:8px;
+overflow:hidden;cursor:pointer;transition:.2s;
+border:1px solid rgba(255,255,255,0.05);
+}
+.video-card:hover{
+transform:translateY(-4px);
+box-shadow:0 10px 20px rgba(0,0,0,0.3);
+border-color:var(--accent);
+}
+.thumbnail{
+width:100%;aspect-ratio:16/10;
+position:relative;background:#1e293b;overflow:hidden;
+}
+.thumbnail img{
+width:100%;height:100%;object-fit:cover;
+}
+.play-icon{
+position:absolute;left:50%;top:50%;
+transform:translate(-50%,-50%);
+background:rgba(6,182,212,0.85);border-radius:50%;
+width:48px;height:48px;
+display:grid;place-items:center;
+font-size:21px;color:#0f172a;
+box-shadow:0 0 12px rgba(6,182,212,0.5);
+}
+.video-info{padding:12px}
+.video-info h3{
+font-size:14px;line-height:1.4;margin:0 0 7px;color:#f8fafc;
+}
+.video-info p{
+font-size:11px;color:var(--muted);margin:0;
+}
+.tag{
+display:inline-block;font-size:10px;color:#0f172a;
+background:var(--accent);padding:4px 7px;
+border-radius:4px;margin-top:8px;font-weight:bold;
+}
 
-    <script>
-        // CONFIGURABLE MONETIZATION & AD SETTINGS
-        window.CONFIG = {
-            SMARTLINK_URL: "https://www.profitableratecpmnetwork.com/agijdjkf?key=b68403d796344c04660419b144a9cea4", // Ganti dengan URL Smartlink / Monetisasi Anda
-            ENABLE_POPUNDER: true
-        };
-    </script>
+/* PAGINATION STYLING */
+.pagination{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:6px;
+margin:30px 0;
+flex-wrap:wrap;
+}
+.page-btn{
+background:var(--panel);
+border:1px solid #334155;
+color:#cbd5e1;
+padding:8px 14px;
+border-radius:6px;
+cursor:pointer;
+font-size:13px;
+font-weight:bold;
+transition:.2s;
+}
+.page-btn:hover{
+background:var(--accent);
+color:#0f172a;
+border-color:var(--accent);
+}
+.page-btn.active{
+background:var(--accent);
+color:#0f172a;
+border-color:var(--accent);
+}
+.page-btn:disabled{
+opacity:0.4;
+cursor:not-allowed;
+}
+.page-btn:disabled:hover{
+background:var(--panel);
+color:#cbd5e1;
+border-color:#334155;
+}
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: '#f43f5e',
-                        brandHover: '#e11d48',
-                        darkBg: '#09090b',
-                        cardBg: '#121215',
-                    },
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+.popular{
+margin-top:35px;background:var(--panel);
+padding:16px;border-radius:8px;
+border:1px solid #334155;
+}
+.popular-item{
+display:flex;align-items:center;gap:12px;
+padding:10px 0;border-bottom:1px solid #334155;
+cursor:pointer;transition:.2s;
+}
+.popular-item:hover{
+background:rgba(255,255,255,0.03);
+}
+.popular-item img{
+width:90px;height:58px;object-fit:cover;
+border-radius:4px;
+}
+.popular-item h4{font-size:13px;margin:0 0 5px;color:#f8fafc}
+.popular-item small{color:var(--muted)}
+footer{
+margin-top:35px;padding:25px 15px;
+background:#090d16;text-align:center;
+color:var(--muted);font-size:12px;
+border-top:1px solid #1e293b;
+}
+.theme-buttons{
+display:flex;gap:8px;flex-wrap:wrap;margin:15px 0;
+}
+.theme-buttons button{
+border:0;padding:8px 13px;border-radius:5px;
+cursor:pointer;background:#334155;color:white;
+font-weight:500;transition:.2s;
+}
+.theme-buttons button:hover{
+background:var(--accent);color:#0f172a;
+}
 
-    <style>
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            height: 6px;
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #09090b;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #27272a;
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumbHover {
-            background: #3f3f46;
-        }
+/* PEMUTAR VIDEO */
+#playerPage{display:none}
+.player-heading{
+display:flex;align-items:center;
+justify-content:space-between;gap:10px;
+margin:10px 0 15px;
+}
+.back-button{
+border:0;background:var(--accent);
+color:#0f172a;padding:10px 16px;
+border-radius:5px;cursor:pointer;font-weight:bold;
+}
 
-        .movie-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .movie-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px -10px rgba(244, 63, 94, 0.25);
-        }
+/* CONTAINER PEMUTAR */
+.player-box{
+width:100%;background:#000;
+border-radius:8px;overflow:hidden;
+position:relative;box-shadow:0 10px 25px rgba(0,0,0,0.5);
+}
+.player-frame{
+width:100%;aspect-ratio:16/9;
+border:0;display:block;background:#000;
+}
+.player-title{
+font-size:18px;margin:15px 0 7px;color:#f8fafc;
+}
+.player-category{
+font-size:12px;color:var(--muted);
+margin-bottom:15px;
+}
+.push-area{
+margin:18px 0;padding:15px;
+border:1px solid #334155;
+background:var(--panel);
+border-radius:7px;
+}
+.push-area h3{font-size:14px;margin:0 0 8px;color:#f8fafc}
+.push-area p{
+font-size:12px;color:var(--muted);margin:0;
+}
+.hidden{display:none!important}
 
-        .hero-gradient {
-            background: linear-gradient(180deg, rgba(9,9,11,0) 20%, rgba(9,9,11,0.8) 70%, rgba(9,9,11,1) 100%),
-                        linear-gradient(90deg, rgba(9,9,11,0.95) 0%, rgba(9,9,11,0.6) 50%, rgba(9,9,11,0) 100%);
-        }
+/* CUSTOM IN-PAGE PUSH STYLING */
+#customInPagePush {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%) scale(0.9);
+width: 340px;
+background: var(--panel);
+border: 1px solid var(--accent);
+border-radius: 8px;
+box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+z-index: 99;
+display: none;
+cursor: pointer;
+overflow: hidden;
+opacity: 0;
+transition: all 0.3s ease-out;
+}
+#customInPagePush.show {
+display: block;
+opacity: 1;
+transform: translate(-50%, -50%) scale(1);
+}
+.ipp-header {
+background: var(--accent);
+color: #0f172a;
+padding: 6px 12px;
+font-size: 11px;
+font-weight: bold;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+.ipp-close {
+background: transparent;
+border: none;
+color: #0f172a;
+font-size: 16px;
+font-weight: bold;
+cursor: pointer;
+padding: 0 4px;
+}
+.ipp-body {
+display: flex;
+gap: 10px;
+padding: 12px;
+align-items: center;
+}
+.ipp-body img {
+width: 65px;
+height: 65px;
+object-fit: cover;
+border-radius: 6px;
+}
+.ipp-text h4 {
+font-size: 13px;
+margin: 0 0 4px;
+color: #f8fafc;
+}
+.ipp-text p {
+font-size: 11px;
+margin: 0;
+color: var(--muted);
+}
 
-        .nav-glass {
-            background: rgba(9, 9, 11, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-    </style>
+@media(max-width:850px){
+.video-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:600px){
+.video-grid{
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:10px;
+}
+.video-info{padding:9px}
+.video-info h3{font-size:12px}
+.container{padding:12px}
+nav{gap:13px}
+.player-heading{align-items:flex-start}
+.player-frame{aspect-ratio:16/9}
+#customInPagePush { width: 90%; max-width: 320px; }
+}
+</style>
 </head>
-<body class="bg-darkBg text-zinc-100 font-sans antialiased overflow-x-hidden min-h-screen flex flex-col justify-between selection:bg-brand selection:text-white" onclick="triggerPopunder(event)">
+<body>
 
-    <!-- Header Navigation -->
-    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-4 md:px-12 py-3.5 flex items-center justify-between nav-glass border-b border-zinc-800/60">
-        <div class="flex items-center space-x-8">
-            <!-- Brand Logo -->
-            <a href="#" class="text-white font-extrabold text-lg md:text-xl tracking-tight flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-brand"></span>
-                <span>DUNIA DEWASA</span>
-            </a>
+<header id="siteHeader">
+<div class="topbar">
+<a class="logo" href="#" onclick="showGallery();return false">
+HUMSTER<span>STREAM</span>
+</a>
+<nav>
+<a href="#" onclick="showGallery();return false">Home</a>
+<a href="#gallery" onclick="showGallery()">Gallery</a>
+<a href="#popular" onclick="showGallery()">Popular</a>
+<a href="#help">Help Center</a>
+</nav>
+</div>
 
-            <!-- Navigation Links -->
-            <nav class="hidden md:flex space-x-6 text-sm font-medium text-zinc-400">
-                <a href="#" onclick="filterCategory('all')" class="hover:text-white transition font-semibold text-white nav-link" id="nav-all">Beranda</a>
-                <a href="#" onclick="filterCategory('series')" class="hover:text-white transition nav-link" id="nav-series">Serial TV</a>
-                <a href="#" onclick="filterCategory('movie')" class="hover:text-white transition nav-link" id="nav-movie">Film</a>
-                <a href="#" onclick="filterCategory('trending')" class="hover:text-white transition nav-link" id="nav-trending">Trending</a>
-                <a href="#" onclick="showMyListOnly()" class="hover:text-white transition nav-link" id="nav-mylist">Daftar Saya (<span id="my-list-count">0</span>)</a>
-                <a href="#" onclick="openSmartlink(event)" class="text-amber-400 font-semibold hover:opacity-80 transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-bolt text-xs"></i> VIP Access
-                </a>
-            </nav>
-        </div>
+<div class="search-wrap">
+<input class="search" id="search"
+placeholder="Search Video..."
+oninput="searchVideos()">
+</div>
+</header>
 
-        <!-- Right Menu (Search, User Profile) -->
-        <div class="flex items-center space-x-3">
-            <!-- Search Box -->
-            <div class="relative flex items-center">
-                <div id="search-container" class="flex items-center bg-zinc-900/80 border border-zinc-800 rounded-full px-3 py-1.5 transition-all duration-300 focus-within:border-zinc-600">
-                    <i class="fa-solid fa-magnifying-glass text-zinc-500 text-xs mr-2 cursor-pointer" onclick="toggleSearchInput()"></i>
-                    <input type="text" id="search-input" onkeyup="handleSearch()" placeholder="Cari film atau serial..." class="bg-transparent text-xs md:text-sm text-zinc-100 focus:outline-none w-28 md:w-44 placeholder-zinc-500">
-                    <button id="clear-search" onclick="clearSearch()" class="hidden text-zinc-500 hover:text-white text-xs ml-1">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
-                </div>
-            </div>
+<!-- GALERI -->
+<main class="container" id="galleryPage">
 
-            <!-- Profile Dropdown -->
-            <div class="relative group">
-                <button class="flex items-center space-x-2 focus:outline-none">
-                    <img src="https://i.ibb.co/GyvndTh/1794386835775.jpg" alt="User Profile" class="w-8 h-8 rounded-full object-cover border border-zinc-700">
-                </button>
-                <div class="absolute right-0 mt-2 w-48 bg-cardBg rounded-xl shadow-2xl py-2 border border-zinc-800 hidden group-hover:block z-50">
-                    <div class="px-4 py-2 border-b border-zinc-800 flex items-center space-x-3">
-                        <img src="https://i.ibb.co/GyvndTh/1794386835775.jpg" class="w-7 h-7 rounded-full">
-                        <span class="text-xs font-semibold truncate">Pengguna VIP</span>
-                    </div>
-                    <a href="#" class="block px-4 py-2 text-xs text-zinc-300 hover:bg-zinc-800 hover:text-white"><i class="fa-solid fa-user mr-2 text-zinc-500"></i> Akun Saya</a>
-                    <a href="#" class="block px-4 py-2 text-xs text-zinc-300 hover:bg-zinc-800 hover:text-white"><i class="fa-solid fa-circle-question mr-2 text-zinc-500"></i> Bantuan</a>
-                    <div class="border-t border-zinc-800 my-1"></div>
-                    <a href="#" class="block px-4 py-2 text-xs font-semibold text-brand hover:bg-zinc-800"><i class="fa-solid fa-right-from-bracket mr-2"></i> Keluar</a>
-                </div>
-            </div>
-        </div>
-    </header>
+<div class="category">
+<a class="active" href="#" data-cat="All">Best of</a>
+<a href="#" data-cat="Hits">Hits</a>
+<a href="#" data-cat="Pictures">Pictures</a>
+<a href="#" data-cat="Live">Live Video</a>
+<a href="#" data-cat="Stories">Stories</a>
+<a href="#" data-cat="Series">New Series</a>
+<a href="#" data-cat="Movies">Movies</a>
+<a href="#" data-cat="Anime">Anime</a>
+<a href="#" data-cat="Comedy">Comedy</a>
+</div>
 
-    <!-- Main Content Wrapper -->
-    <main class="flex-grow pb-16 pt-16">
-        
-        <!-- Search Results Banner Header -->
-        <div id="search-header" class="hidden pt-6 px-4 md:px-12 mb-4">
-            <h2 class="text-lg md:text-xl font-semibold text-zinc-400">Hasil Pencarian untuk: <span id="search-keyword" class="text-white font-bold italic"></span></h2>
-        </div>
+<div class="theme-buttons">
+<button onclick="setTheme('#0f172a','#06b6d4')">Default (Cyan)</button>
+<button onclick="setTheme('#0b0f19','#e84b63')">Crimson Dark</button>
+<button onclick="setTheme('#181024','#a855f7')">Electric Purple</button>
+<button onclick="setTheme('#061c14','#10b981')">Emerald Green</button>
+<button onclick="setTheme('#1c1305','#f59e0b')">Warm Amber</button>
+</div>
 
-        <!-- HERO BANNER SECTION -->
-        <section id="hero-section" class="relative w-full h-[65vh] md:h-[75vh] flex items-end pb-10 md:pb-16 px-4 md:px-12 bg-cover bg-center transition-all duration-700" style="background-image: url('https://i.ibb.co/GyvndTh/1794386835775.jpg');">
-            <!-- Gradient Overlay -->
-            <div class="absolute inset-0 hero-gradient"></div>
+<div class="section-title" id="gallery">
+<span>Latest Videos</span>
+<small>Discover new content</small>
+</div>
 
-            <!-- Hero Content -->
-            <div class="relative z-10 max-w-2xl space-y-3">
-                <div class="flex items-center space-x-2">
-                    <span class="bg-brand/20 text-brand border border-brand/30 text-[10px] font-bold tracking-wider px-2 py-0.5 rounded-full uppercase">HOT TRENDING #1</span>
-                    <span class="text-xs text-zinc-300 font-medium flex items-center gap-1"><i class="fa-solid fa-star text-amber-400"></i> 9.6</span>
-                </div>
-                <h1 id="hero-title" class="text-2xl md:text-5xl font-extrabold tracking-tight text-white">
-                    DUNIA DEWASA
-                </h1>
-                <p id="hero-desc" class="text-xs md:text-sm text-zinc-400 line-clamp-2 md:line-clamp-3 leading-relaxed max-w-lg">
-                    Hanya sekedar hiburan, selamat menikmati sajian streaming pilihan terbaik berkualitas tinggi.
-                </p>
-                
-                <!-- Action Buttons -->
-                <div class="flex items-center space-x-3 pt-2">
-                    <button onclick="playVideo('Malam Penuh Gairah', 'https://vidara.to/e/tGzcgx5Va1rDU')" class="flex items-center justify-center space-x-2 bg-white hover:bg-zinc-200 text-zinc-950 font-bold px-5 py-2.5 rounded-lg transition text-xs md:text-sm shadow-md">
-                        <i class="fa-solid fa-play text-xs"></i>
-                        <span>Putar Sekarang</span>
-                    </button>
-                    <button onclick="openDetailModal(heroMediaData)" class="flex items-center justify-center space-x-2 bg-zinc-800/80 hover:bg-zinc-700 text-white font-medium px-4 py-2.5 rounded-lg transition border border-zinc-700 text-xs md:text-sm backdrop-blur-sm">
-                        <i class="fa-solid fa-circle-info text-xs"></i>
-                        <span>Selengkapnya</span>
-                    </button>
-                </div>
-            </div>
-        </section>
+<div class="video-grid" id="videoGrid"></div>
 
-        <!-- ROWS CONTAINER -->
-        <div id="rows-container" class="space-y-8 md:space-y-12 -mt-10 md:-mt-16 relative z-20 px-4 md:px-12">
-            
-            <!-- Row 1: Sedang Tren -->
-            <div class="category-row">
-                <h2 class="text-base md:text-lg font-bold mb-4 flex items-center text-zinc-100 tracking-wide">
-                    <span class="w-1.5 h-4 bg-brand mr-2 rounded-full"></span>Sedang Tren
-                </h2>
-                <div id="row-trending" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4"></div>
-            </div>
+<!-- PAGINATION CONTAINER -->
+<div class="pagination" id="pagination"></div>
 
-            <!-- Row 2: Film Terpopuler -->
-            <div class="category-row">
-                <h2 class="text-base md:text-lg font-bold mb-4 flex items-center text-zinc-100 tracking-wide">
-                    <span class="w-1.5 h-4 bg-brand mr-2 rounded-full"></span>Film Blockbuster
-                </h2>
-                <div id="row-movies" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4"></div>
-            </div>
+<section class="popular" id="popular">
+<div class="section-title">
+<span>Most Popular</span>
+</div>
+<div id="popularList"></div>
+</section>
+</main>
 
-            <!-- Row 3: Serial TV -->
-            <div class="category-row">
-                <h2 class="text-base md:text-lg font-bold mb-4 flex items-center text-zinc-100 tracking-wide">
-                    <span class="w-1.5 h-4 bg-brand mr-2 rounded-full"></span>Serial TV Pilihan
-                </h2>
-                <div id="row-series" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4"></div>
-            </div>
+<!-- HALAMAN PEMUTAR -->
+<main class="container" id="playerPage">
 
-            <!-- Row 4: Daftar Saya -->
-            <div id="my-list-section" class="category-row">
-                <h2 class="text-base md:text-lg font-bold mb-4 flex items-center text-zinc-100 tracking-wide">
-                    <span class="w-1.5 h-4 bg-brand mr-2 rounded-full"></span>Daftar Saya
-                </h2>
-                <div id="row-mylist" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4"></div>
-            </div>
+<div class="player-heading">
+<h2 style="font-size:18px;margin:0">
+StreamGallery Player
+</h2>
+<button class="back-button" onclick="showGallery()">
+← Kembali
+</button>
+</div>
 
-        </div>
+<div class="player-box">
+<iframe
+id="videoFrame"
+class="player-frame"
+src="about:blank"
+allow="autoplay; fullscreen; picture-in-picture"
+allowfullscreen
+referrerpolicy="strict-origin-when-cross-origin">
+</iframe>
 
-    </main>
+<!-- CUSTOM IN-PAGE PUSH ELEMENT -->
+<div id="customInPagePush" onclick="triggerSmartLink(event)">
+<div class="ipp-header">
+<span>RECOMMENDED FOR YOU</span>
+<button class="ipp-close" onclick="closeInPagePush(event)">&times;</button>
+</div>
+<div class="ipp-body">
+<img id="ippThumb" src="" alt="Thumbnail">
+<div class="ipp-text">
+<h4 id="ippTitle">Special Video Offer</h4>
+<p>Click here to watch full video in HD quality.</p>
+</div>
+</div>
+</div>
 
-    <!-- FOOTER -->
-    <footer class="bg-darkBg text-zinc-500 text-xs py-8 px-4 md:px-12 border-t border-zinc-900">
-        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <p>© 2026 DUNIA DEWASA. Hak cipta dilindungi.</p>
-            <div class="flex space-x-6 text-zinc-400">
-                <a href="#" class="hover:text-white transition">Privasi</a>
-                <a href="#" class="hover:text-white transition">Ketentuan</a>
-                <a href="#" class="hover:text-white transition">Bantuan</a>
-            </div>
-        </div>
-    </footer>
+</div>
 
-    <!-- MODAL DETAIL FILM/SERIES -->
-    <div id="detail-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex justify-center items-center p-3 md:p-6 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-cardBg w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl relative border border-zinc-800 max-h-[90vh] flex flex-col transform scale-95 transition-transform duration-300" id="detail-modal-content">
-            
-            <!-- Close Button -->
-            <button onclick="closeDetailModal()" class="absolute top-4 right-4 z-20 bg-zinc-900/80 hover:bg-zinc-800 text-zinc-300 hover:text-white w-8 h-8 rounded-full flex items-center justify-center transition border border-zinc-700">
-                <i class="fa-solid fa-xmark text-sm"></i>
-            </button>
+<h2 class="player-title" id="playerTitle">
+Video Title
+</h2>
 
-            <!-- Modal Header Image/Banner -->
-            <div class="relative h-56 md:h-72 bg-cover bg-center flex items-end p-6" id="modal-banner">
-                <div class="absolute inset-0 bg-gradient-to-t from-cardBg via-cardBg/30 to-transparent"></div>
-                <div class="relative z-10 space-y-2">
-                    <h3 id="modal-title" class="text-xl md:text-3xl font-bold text-white"></h3>
-                    <div class="flex items-center space-x-3">
-                        <button id="modal-play-btn" class="bg-white hover:bg-zinc-200 text-zinc-950 px-5 py-2 rounded-lg font-bold flex items-center space-x-2 text-xs shadow">
-                            <i class="fa-solid fa-play text-xs"></i>
-                            <span>Putar</span>
-                        </button>
-                        <button id="modal-mylist-btn" onclick="toggleMyListFromModal()" class="w-9 h-9 border border-zinc-700 hover:border-zinc-500 rounded-lg flex items-center justify-center bg-zinc-900/50 text-zinc-300 transition">
-                            <i class="fa-solid fa-plus text-xs"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
+<div class="player-category" id="playerCategory"></div>
 
-            <!-- Modal Body Info -->
-            <div class="p-6 overflow-y-auto space-y-4 text-zinc-400 text-xs md:text-sm">
-                <div class="flex flex-wrap items-center gap-3 text-xs">
-                    <span id="modal-match" class="text-emerald-400 font-bold">98% Cocok</span>
-                    <span id="modal-year" class="text-zinc-400">2026</span>
-                    <span id="modal-rating" class="border border-zinc-700 text-zinc-300 px-1.5 py-0.5 rounded text-[10px]">18+</span>
-                    <span id="modal-duration" class="text-zinc-400">1 Season</span>
-                </div>
+<section class="push-area">
+<h3>Recommended Content</h3>
+<p>Discover more content and recommendations.</p>
+</section>
 
-                <p id="modal-desc" class="text-zinc-300 leading-relaxed text-xs md:text-sm"></p>
+</main>
 
-                <div class="pt-3 border-t border-zinc-800/80 grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
-                    <div>
-                        <span class="text-zinc-500">Pemeran:</span>
-                        <span id="modal-cast" class="text-zinc-300 block mt-0.5">Aktor Utama</span>
-                    </div>
-                    <div>
-                        <span class="text-zinc-500">Genre:</span>
-                        <span id="modal-genre" class="text-zinc-300 block mt-0.5">Drama, Romantis</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<footer id="siteFooter">
+<p>Copyright © 2026 StreamGallery</p>
+<p>Home | Privacy Policy | Contact | Help Center</p>
+</footer>
 
-    <!-- EMBED VIDEO PLAYER MODAL -->
-    <div id="video-player-modal" class="fixed inset-0 z-50 bg-black flex flex-col justify-between hidden">
-        <!-- Video Header Controls -->
-        <div class="absolute top-0 left-0 right-0 p-4 bg-gradient-to-b from-black/90 to-transparent flex justify-between items-center z-30">
-            <div class="flex items-center space-x-3">
-                <button onclick="closeVideoPlayer()" class="text-zinc-300 hover:text-white text-lg focus:outline-none bg-zinc-900/60 p-2 rounded-full border border-zinc-800">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </button>
-                <h2 id="player-title" class="text-white font-semibold text-sm md:text-base truncate max-w-xs md:max-w-md">Memutar Video</h2>
-            </div>
-            <button onclick="openSmartlink(event)" class="bg-brand text-white px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-brandHover transition flex items-center gap-1.5">
-                <i class="fa-solid fa-external-link text-[10px]"></i> VIP HD
-            </button>
-        </div>
+<script>
+// =====================================
+// DATABASE VIDEO (Diperbarui dengan link baru)
+// =====================================
+const videos = [
+{title:"adik ipar dengan gaya bebasnya", category:"Hits", image:"https://i.ibb.co/kgnVLW6Y/1794387330360.jpg", video:"https://trbnvideo.live/e/VL7qheeF", popular:true},
+{title:"gadis sma viral", category:"Stories", image:"https://i.ibb.co/PvLKf83y/1794387320861.jpg", video:"https://trbnvideo.live/e/n2ynm2ew", popular:true},
+{title:"diam tapi mematikan", category:"Pictures", image:"https://i.ibb.co/1J0PRxhm/1794387314100.jpg", video:"https://trbnvideo.live/e/m98SiXXr"},
+{title:"samping rumah sangat menggoda", category:"Live", image:"https://i.ibb.co/Q72t4L1r/1794387307121.jpg", video:"https://trbnvideo.live/e/nGBKt5B5"},
+{title:"Dibiki lemas sama om", category:"Movies", image:"https://i.ibb.co/1GDmJF7M/1794387234452.jpg", video:"https://trbnvideo.live/e/7QGAKwog", popular:true},
+{title:"suasananya berubah jadi tegang", category:"Series", image:"https://i.ibb.co/0jD0Lk04/1794387208499.jpg", video:"https://trbnvideo.live/e/AHrIhPhz"},
+{title:"desahannya bikin kangen", category:"Stories", image:"https://i.ibb.co/Q3wS9GNL/1794387157041.jpg", video:"https://trbnvideo.live/e/8rPvx2sU"},
+{title:"abg jaman sekarang", category:"Anime", image:"https://i.ibb.co/dwgr3Bf3/1794387129039.jpg", video:"https://trbnvideo.live/e/FnfkZWqp"},
+{title:"pesona malam hari", category:"Comedy", image:"https://i.ibb.co/7x6xrRxc/1794387219377.jpg", video:"https://trbnvideo.live/e/3DlVuUCX"},
+{title:"pesona tambahan terbaru", category:"Hits", image:"https://i.ibb.co/fVr1m9zf/1794387118118.jpg", video:"https://trbnvideo.live/e/lZxcMQiT", popular:true}
+];
 
-        <!-- Embedded Video Container (Iframe) -->
-        <div class="relative w-full h-full flex items-center justify-center bg-black pt-12">
-            <iframe id="main-embed-iframe" class="w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-        </div>
-    </div>
+// =====================================
+// TAMPILAN GALERI & PAGINASI
+// =====================================
+let activeCategory = "All";
+let currentPage = 1;
+const itemsPerPage = 8;
+const smartLinkUrl = "https://www.profitableratecpmnetwork.com/agijdjkf?key=b68403d796344c04660419b144a9cea4";
 
-    <!-- TOAST NOTIFICATION -->
-    <div id="toast" class="fixed bottom-6 left-6 z-50 bg-zinc-900 border border-zinc-800 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center space-x-3 transform translate-y-20 opacity-0 transition-all duration-300">
-        <i class="fa-solid fa-circle-check text-brand text-sm"></i>
-        <span id="toast-message" class="text-xs font-medium">Notifikasi</span>
-    </div>
+let pushTimer = null;
+let hideTimer = null;
 
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        // DATA MASTER CATALOG FILM & SERIAL (Diperbarui dengan link video baru vidara.to)
-        const mediaDatabase = [
-            {
-                id: 'm1',
-                title: 'Malam Penuh Gairah',
-                category: 'series',
-                trending: true,
-                rating: '18+',
-                year: '2026',
-                duration: '1 Season',
-                match: '98%',
-                image: 'https://i.ibb.co/GyvndTh/1794386835775.jpg',
-                videoUrl: 'https://vidara.to/e/tGzcgx5Va1rDU',
-                desc: 'Sebuah kisah romantis penuh misteri yang menguji batas kesetiaan dan emosi.',
-                cast: 'Reza Rahadian, Dian Sastrowardoyo',
-                genre: 'Drama, Romantis, Serial'
-            },
-            {
-                id: 'm2',
-                title: 'Gelora Cinta Terlarang',
-                category: 'movie',
-                trending: true,
-                rating: '18+',
-                year: '2026',
-                duration: '1j 55m',
-                match: '95%',
-                image: 'https://i.ibb.co/7Fht533/1794386801113.jpg',
-                videoUrl: 'https://vidara.to/e/deFS6hrd9bmL1',
-                desc: 'Konflik batin dan asmara rumit yang terjadi di balik gemerlapnya kehidupan malam kota.',
-                cast: 'Nicholas Saputra, Amanda Manopo',
-                genre: 'Drama, Romantis'
-            },
-            {
-                id: 'm3',
-                title: 'Bisikan Malam',
-                category: 'movie',
-                trending: false,
-                rating: '18+',
-                year: '2025',
-                duration: '1j 45m',
-                match: '89%',
-                image: 'https://i.ibb.co/S7RdW6JF/1794386708126.jpg',
-                videoUrl: 'https://vidara.to/e/8Rwx9sWWnIw7e',
-                desc: 'Ketegangan psikologis yang dibalut dengan intrik rahasia kelam masa lalu.',
-                cast: 'Joe Taslim, Marsha Timothy',
-                genre: 'Thriller, Misteri'
-            },
-            {
-                id: 'm4',
-                title: 'Godaan Tersembunyi',
-                category: 'movie',
-                trending: true,
-                rating: '18+',
-                year: '2026',
-                duration: '2j 02m',
-                match: '92%',
-                image: 'https://i.ibb.co/JW1dXfxr/1794386703660.jpg',
-                videoUrl: 'https://vidara.to/e/IQfXL8EF8lQWW',
-                desc: 'Pilihan sulit antara ambisi profesional dan godaan perasaan yang mengguncang segalanya.',
-                cast: 'Vino G. Bastian, Laura Basuki',
-                genre: 'Drama, Romantis'
-            },
-            {
-                id: 'm5',
-                title: 'Pesona Sang Primadona',
-                category: 'series',
-                trending: false,
-                rating: '18+',
-                year: '2025',
-                duration: '2 Season',
-                match: '96%',
-                image: 'https://i.ibb.co/qLZPNVxJ/1794386683835.jpg',
-                videoUrl: 'https://vidara.to/e/v2YcyuQNal0F4',
-                desc: 'Kisah panggung hiburan malam dan intrik perebutan pengaruh penuh warna.',
-                cast: 'Adipati Dolken, Pevita Pearce',
-                genre: 'Drama, Serial'
-            },
-            {
-                id: 'm6',
-                title: 'Sentuhan Kasih Abadi',
-                category: 'series',
-                trending: true,
-                rating: '18+',
-                year: '2026',
-                duration: '1 Season',
-                match: '94%',
-                image: 'https://i.ibb.co/gZfCyhQT/1794386755498.jpg',
-                videoUrl: 'https://vidara.to/e/jmx6RCHYxnU0r',
-                desc: 'Drama emosional tentang menemukan kembali makna kehangatan dan cinta sejati.',
-                cast: 'Abimana Aryasatya, Tara Basro',
-                genre: 'Drama, Romantis'
-            },
-            {
-                id: 'm7',
-                title: 'Misteri Kamar Sebelah',
-                category: 'movie',
-                trending: false,
-                rating: '18+',
-                year: '2025',
-                duration: '1j 50m',
-                match: '91%',
-                image: 'https://i.ibb.co/6J7SkhCx/1794386609310.jpg',
-                videoUrl: 'https://vidara.to/e/hbOrYFAhguUmt',
-                desc: 'Sebuah apartemen mewah menyimpan rahasia kelam dari para penghuninya.',
-                cast: 'Ario Bayu, Hannah Al Rashid',
-                genre: 'Thriller, Misteri'
-            },
-            {
-                id: 'm8',
-                title: 'Sisi Lain Kehidupan',
-                category: 'movie',
-                trending: true,
-                rating: '18+',
-                year: '2026',
-                duration: '1j 58m',
-                match: '97%',
-                image: 'https://i.ibb.co/nM2Y2n0H/1794386585135.jpg',
-                videoUrl: 'https://vidara.to/e/eptVkbdLO6ocI',
-                desc: 'Perjalanan hidup seseorang yang mencoba keluar dari bayang-bayang masa lalunya.',
-                cast: 'Chicco Jerikho, Julie Estelle',
-                genre: 'Drama, Kriminal'
-            },
-            {
-                id: 'm9',
-                title: 'Bayang-Bayang Asmara',
-                category: 'movie',
-                trending: true,
-                rating: '18+',
-                year: '2026',
-                duration: '2j 05m',
-                match: '96%',
-                image: 'https://i.ibb.co/FLBf5wY7/1794386512217.jpg',
-                videoUrl: 'https://vidara.to/e/QO9MlEycJSb9e',
-                desc: 'Kisah cinta rumit yang bersemi di tengah kesibukan kota metropolitan yang tiada henti.',
-                cast: 'Morgan Oey, Tatjana Saphira',
-                genre: 'Romantis, Drama'
-            },
-            {
-                id: 'm10',
-                title: 'Rindu yang Tertunda',
-                category: 'series',
-                trending: false,
-                rating: '18+',
-                year: '2025',
-                duration: '1 Season',
-                match: '92%',
-                image: 'https://i.ibb.co/FbmYh1tr/1794386070183.jpg',
-                videoUrl: 'https://vidara.to/e/3A5xSpaSSzGOr',
-                desc: 'Pertemuan kembali dua insan setelah sekian lama terpisah oleh keadaan.',
-                cast: 'Refal Hady, Caitlin Halderman',
-                genre: 'Drama, Romantis, Serial'
-            }
-        ];
+function createCard(video, index){
+return `
+<article class="video-card" onclick="openVideo(${index})">
+<div class="thumbnail">
+<img src="${video.image}" alt="${video.title}">
+<div class="play-icon">▶</div>
+</div>
+<div class="video-info">
+<h3>${video.title}</h3>
+<p>Category: ${video.category}</p>
+<span class="tag">${video.category}</span>
+</div>
+</article>`;
+}
 
-        // POPUNDER MONETIZATION LOGIC
-        let hasTriggeredPopunder = false;
+function renderVideos(){
+const grid = document.getElementById("videoGrid");
+let filtered = videos.map((v, i) => ({...v, index: i}));
 
-        function triggerPopunder(event) {
-            if (window.CONFIG.ENABLE_POPUNDER && !hasTriggeredPopunder) {
-                const target = event.target;
-                if (target.closest('button') || target.closest('a') || target.closest('input')) {
-                    window.open(window.CONFIG.SMARTLINK_URL, '_blank');
-                    hasTriggeredPopunder = true;
-                }
-            }
-        }
+if(activeCategory !== "All"){
+filtered = filtered.filter(v => v.category === activeCategory);
+}
 
-        function openSmartlink(event) {
-            if (event) event.stopPropagation();
-            window.open(window.CONFIG.SMARTLINK_URL, '_blank');
-        }
+const keyword = document.getElementById("search").value.toLowerCase();
+filtered = filtered.filter(v => v.title.toLowerCase().includes(keyword));
 
-        // State Management
-        let myList = JSON.parse(localStorage.getItem('streamflix_mylist')) || [];
-        let activeMediaForModal = null;
-        const heroMediaData = mediaDatabase[0];
+const totalPages = Math.ceil(filtered.length / itemsPerPage) || 1;
+if(currentPage > totalPages) currentPage = totalPages;
 
-        // INITIALIZATION
-        window.onload = () => {
-            renderAllRows();
-            updateMyListBadge();
+const start = (currentPage - 1) * itemsPerPage;
+const paginatedItems = filtered.slice(start, start + itemsPerPage);
 
-            window.addEventListener('scroll', () => {
-                const navbar = document.getElementById('navbar');
-                if (window.scrollY > 40) {
-                    navbar.classList.add('bg-darkBg/95', 'shadow-lg');
-                } else {
-                    navbar.classList.remove('bg-darkBg/95', 'shadow-lg');
-                }
-            });
-        };
+grid.innerHTML = paginatedItems.map(v => createCard(v, v.index)).join("");
 
-        // RENDER CARDS TO ROWS
-        function renderAllRows() {
-            renderRow('row-trending', mediaDatabase.filter(m => m.trending));
-            renderRow('row-movies', mediaDatabase.filter(m => m.category === 'movie'));
-            renderRow('row-series', mediaDatabase.filter(m => m.category === 'series'));
-            renderMyListRow();
-        }
+if(filtered.length === 0){
+grid.innerHTML = "<p style='grid-column: 1/-1; text-align: center;'>Video tidak ditemukan.</p>";
+}
 
-        function createCardHTML(item) {
-            const isSaved = myList.some(m => m.id === item.id);
-            return `
-                <div class="movie-card w-full bg-cardBg rounded-xl overflow-hidden relative cursor-pointer group flex flex-col justify-between border border-zinc-800/80">
-                    <div class="relative overflow-hidden">
-                        <img src="${item.image}" alt="${item.title}" class="w-full h-36 md:h-44 object-cover group-hover:scale-105 transition duration-500" onclick="playVideo('${item.title}', '${item.videoUrl}')" title="Klik untuk memutar">
-                        <div class="absolute top-2 right-2 bg-black/60 backdrop-blur-md px-1.5 py-0.5 rounded text-[10px] font-semibold text-emerald-400">
-                            ${item.match}
-                        </div>
-                    </div>
-                    
-                    <div class="p-3 space-y-2 flex-grow flex flex-col justify-between">
-                        <div>
-                            <h4 class="font-semibold text-xs md:text-sm text-white truncate cursor-pointer hover:text-brand transition" onclick="openDetailModalById('${item.id}')" title="${item.title}">${item.title}</h4>
-                        </div>
-                        <div class="flex items-center justify-between pt-2 border-t border-zinc-800/60">
-                            <div class="flex items-center space-x-1.5 text-[10px] text-zinc-400 font-medium">
-                                <span class="border border-zinc-700 px-1 rounded text-[9px]">${item.rating}</span>
-                                <span>${item.duration}</span>
-                            </div>
-                            <div class="flex space-x-1.5">
-                                <button onclick="event.stopPropagation(); playVideo('${item.title}', '${item.videoUrl}')" class="w-6 h-6 rounded-full bg-white text-zinc-950 flex items-center justify-center hover:bg-brand hover:text-white transition" title="Putar">
-                                    <i class="fa-solid fa-play text-[10px] ml-0.5"></i>
-                                </button>
-                                <button onclick="event.stopPropagation(); toggleMyList('${item.id}')" class="w-6 h-6 rounded-full border border-zinc-700 flex items-center justify-center hover:border-white text-zinc-300 transition" title="Daftar Saya">
-                                    <i class="fa-solid ${isSaved ? 'fa-check text-brand' : 'fa-plus'} text-[10px]"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
+renderPagination(totalPages);
+}
 
-        function renderRow(elementId, items) {
-            const container = document.getElementById(elementId);
-            if (!container) return;
-            if (items.length === 0) {
-                container.innerHTML = `<p class="text-xs text-zinc-500 py-4 col-span-full">Tidak ada konten tersedia.</p>`;
-                return;
-            }
-            container.innerHTML = items.map(item => createCardHTML(item)).join('');
-        }
+function renderPagination(totalPages){
+const paginationEl = document.getElementById("pagination");
+if(totalPages <= 1){
+paginationEl.innerHTML = "";
+return;
+}
 
-        function renderMyListRow() {
-            const container = document.getElementById('row-mylist');
-            if (myList.length === 0) {
-                container.innerHTML = `
-                    <div class="py-6 px-4 text-center w-full bg-cardBg/50 rounded-xl border border-zinc-800/80 col-span-full">
-                        <p class="text-zinc-400 text-xs">Daftar favorit Anda masih kosong.</p>
-                        <p class="text-zinc-600 text-xs mt-1">Klik ikon (+) pada film untuk menyimpannya.</p>
-                    </div>
-                `;
-                return;
-            }
-            container.innerHTML = myList.map(item => createCardHTML(item)).join('');
-        }
+let html = '';
+html += `<button class="page-btn" ${currentPage === 1 ? 'disabled' : ''} onclick="changePage(${currentPage - 1})">Prev</button>`;
 
-        // FAVORITE / MY LIST MANAGEMENT
-        function toggleMyList(mediaId) {
-            const item = mediaDatabase.find(m => m.id === mediaId);
-            if (!item) return;
+let startPage = Math.max(1, currentPage - 2);
+let endPage = Math.min(totalPages, startPage + 4);
 
-            const index = myList.findIndex(m => m.id === mediaId);
-            if (index > -1) {
-                myList.splice(index, 1);
-                showToast(`"${item.title}" dihapus dari Daftar Saya`);
-            } else {
-                myList.push(item);
-                showToast(`"${item.title}" ditambahkan ke Daftar Saya`);
-            }
+if(endPage - startPage < 4) {
+startPage = Math.max(1, endPage - 4);
+}
 
-            localStorage.setItem('streamflix_mylist', JSON.stringify(myList));
-            updateMyListBadge();
-            renderAllRows();
+for(let i = startPage; i <= endPage; i++){
+html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
+}
 
-            if (activeMediaForModal && activeMediaForModal.id === mediaId) {
-                updateModalMyListBtn(mediaId);
-            }
-        }
+html += `<button class="page-btn" ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(${currentPage + 1})">Next</button>`;
 
-        function toggleMyListFromModal() {
-            if (activeMediaForModal) {
-                toggleMyList(activeMediaForModal.id);
-            }
-        }
+paginationEl.innerHTML = html;
+}
 
-        function updateMyListBadge() {
-            document.getElementById('my-list-count').innerText = myList.length;
-        }
+function changePage(page){
+currentPage = page;
+renderVideos();
+window.scrollTo({top: 0, behavior: "smooth"});
+}
 
-        // DETAIL MODAL LOGIC
-        function openDetailModalById(id) {
-            const media = mediaDatabase.find(m => m.id === id);
-            if (media) openDetailModal(media);
-        }
+// =====================================
+// KLIK VIDEO + SMARTLINK & IN-PAGE PUSH TIMER
+// =====================================
+function openVideo(index){
+window.open(smartLinkUrl, "_blank");
 
-        function openDetailModal(media) {
-            activeMediaForModal = media;
-            const modal = document.getElementById('detail-modal');
-            const content = document.getElementById('detail-modal-content');
+const video = videos[index];
+if(!video || !video.video){
+alert("Link video belum tersedia.");
+return;
+}
 
-            document.getElementById('modal-banner').style.backgroundImage = `url('${media.image}')`;
-            document.getElementById('modal-title').innerText = media.title;
-            document.getElementById('modal-desc').innerText = media.desc;
-            document.getElementById('modal-match').innerText = `${media.match} Cocok`;
-            document.getElementById('modal-year').innerText = media.year;
-            document.getElementById('modal-rating').innerText = media.rating;
-            document.getElementById('modal-duration').innerText = media.duration;
-            document.getElementById('modal-cast').innerText = media.cast;
-            document.getElementById('modal-genre').innerText = media.genre;
+document.getElementById("galleryPage").style.display = "none";
+document.getElementById("playerPage").style.display = "block";
+document.querySelector(".search-wrap").style.display = "none";
 
-            document.getElementById('modal-play-btn').onclick = () => {
-                closeDetailModal();
-                playVideo(media.title, media.videoUrl);
-            };
+document.getElementById("playerTitle").textContent = video.title;
+document.getElementById("playerCategory").textContent = "Category: " + video.category;
+document.getElementById("videoFrame").src = video.video;
 
-            updateModalMyListBtn(media.id);
+document.getElementById("ippThumb").src = video.image;
+document.getElementById("ippTitle").textContent = video.title;
 
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            content.classList.remove('scale-95');
-            content.classList.add('scale-100');
-        }
+window.scrollTo({top: 0, behavior: "smooth"});
+try {
+    history.pushState({page: "player", index: index}, "", "#watch-" + index);
+} catch(e) {}
 
-        function updateModalMyListBtn(id) {
-            const isSaved = myList.some(m => m.id === id);
-            const btn = document.getElementById('modal-mylist-btn');
-            btn.innerHTML = `<i class="fa-solid ${isSaved ? 'fa-check text-brand' : 'fa-plus'} text-xs"></i>`;
-        }
+clearTimeout(pushTimer);
+clearTimeout(hideTimer);
 
-        function closeDetailModal() {
-            const modal = document.getElementById('detail-modal');
-            const content = document.getElementById('detail-modal-content');
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            content.classList.remove('scale-100');
-            content.classList.add('scale-95');
-        }
+pushTimer = setTimeout(() => {
+    const pushEl = document.getElementById("customInPagePush");
+    pushEl.classList.add("show");
 
-        // CATEGORY & SEARCH FILTERING
-        function filterCategory(category) {
-            const heroSection = document.getElementById('hero-section');
-            const searchHeader = document.getElementById('search-header');
-            searchHeader.classList.add('hidden');
+    hideTimer = setTimeout(() => {
+        pushEl.classList.remove("show");
+    }, 25000);
 
-            document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('font-semibold', 'text-white'));
-            const activeNav = document.getElementById(`nav-${category}`);
-            if (activeNav) activeNav.classList.add('font-semibold', 'text-white');
+}, 20000);
+}
 
-            if (category === 'all') {
-                heroSection.style.display = 'flex';
-                renderAllRows();
-            } else if (category === 'trending') {
-                heroSection.style.display = 'none';
-                renderRow('row-trending', mediaDatabase.filter(m => m.trending));
-                renderRow('row-movies', []);
-                renderRow('row-series', []);
-                renderRow('row-mylist', []);
-            } else {
-                heroSection.style.display = 'none';
-                const filtered = mediaDatabase.filter(m => m.category === category);
-                renderRow('row-trending', filtered);
-                renderRow('row-movies', []);
-                renderRow('row-series', []);
-                renderRow('row-mylist', []);
-            }
-        }
+function showGallery(){
+clearTimeout(pushTimer);
+clearTimeout(hideTimer);
+document.getElementById("customInPagePush").classList.remove("show");
 
-        function showMyListOnly() {
-            document.getElementById('hero-section').style.display = 'none';
-            document.getElementById('search-header').classList.add('hidden');
-            renderRow('row-trending', []);
-            renderRow('row-movies', []);
-            renderRow('row-series', []);
-            renderMyListRow();
-        }
+document.getElementById("videoFrame").src = "about:blank";
+document.getElementById("playerPage").style.display = "none";
+document.getElementById("galleryPage").style.display = "block";
+document.querySelector(".search-wrap").style.display = "block";
 
-        function handleSearch() {
-            const query = document.getElementById('search-input').value.toLowerCase().trim();
-            const clearBtn = document.getElementById('clear-search');
-            const searchHeader = document.getElementById('search-header');
-            const searchKeyword = document.getElementById('search-keyword');
-            const heroSection = document.getElementById('hero-section');
+try {
+    history.pushState({page: "gallery"}, "", window.location.pathname);
+} catch(e) {}
+window.scrollTo({top: 0, behavior: "smooth"});
+}
 
-            if (query.length > 0) {
-                clearBtn.classList.remove('hidden');
-                searchHeader.classList.remove('hidden');
-                searchKeyword.innerText = query;
-                heroSection.style.display = 'none';
+window.addEventListener("popstate", function(){
+clearTimeout(pushTimer);
+clearTimeout(hideTimer);
+document.getElementById("customInPagePush").classList.remove("show");
 
-                const results = mediaDatabase.filter(item => 
-                    item.title.toLowerCase().includes(query) || 
-                    item.genre.toLowerCase().includes(query) ||
-                    item.cast.toLowerCase().includes(query)
-                );
+document.getElementById("videoFrame").src = "about:blank";
+document.getElementById("playerPage").style.display = "none";
+document.getElementById("galleryPage").style.display = "block";
+document.querySelector(".search-wrap").style.display = "block";
+});
 
-                renderRow('row-trending', results);
-                renderRow('row-movies', []);
-                renderRow('row-series', []);
-                renderRow('row-mylist', []);
-            } else {
-                clearSearch();
-            }
-        }
+function triggerSmartLink(e){
+    window.open(smartLinkUrl, "_blank");
+    document.getElementById("customInPagePush").classList.remove("show");
+}
 
-        function clearSearch() {
-            document.getElementById('search-input').value = '';
-            document.getElementById('clear-search').classList.add('hidden');
-            document.getElementById('search-header').classList.add('hidden');
-            document.getElementById('hero-section').style.display = 'flex';
-            renderAllRows();
-        }
+function closeInPagePush(e){
+    e.stopPropagation(); 
+    window.open(smartLinkUrl, "_blank");
+    document.getElementById("customInPagePush").classList.remove("show");
+}
 
-        // EMBEDDED VIDEO PLAYER LOGIC
-        const videoModal = document.getElementById('video-player-modal');
-        const mainEmbedIframe = document.getElementById('main-embed-iframe');
+function searchVideos(){
+currentPage = 1;
+renderVideos();
+}
 
-        function playVideo(title, embedUrl) {
-            openSmartlink();
+document.querySelectorAll(".category a").forEach(link => {
+link.addEventListener("click", function(e){
+e.preventDefault();
+document.querySelectorAll(".category a").forEach(a => a.classList.remove("active"));
+this.classList.add("active");
+activeCategory = this.dataset.cat;
+currentPage = 1;
+renderVideos();
+});
+});
 
-            document.getElementById('player-title').innerText = title;
-            mainEmbedIframe.src = embedUrl;
-            videoModal.classList.remove('hidden');
-        }
+function renderPopular(){
+const popular = videos.map((v, i) => ({...v, index: i})).filter(v => v.popular);
+document.getElementById("popularList").innerHTML = popular.map(v => `
+<div class="popular-item" onclick="openVideo(${v.index})">
+<img src="${v.image}" alt="${v.title}">
+<div>
+<h4>${v.title}</h4>
+<small>${v.category}</small>
+</div>
+</div>
+`).join("");
+}
 
-        function closeVideoPlayer() {
-            mainEmbedIframe.src = '';
-            videoModal.classList.add('hidden');
-        }
+function setTheme(bg, accent){
+document.documentElement.style.setProperty("--bg", bg);
+document.documentElement.style.setProperty("--accent", accent);
+}
 
-        // TOAST NOTIFICATION UTILITY
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            document.getElementById('toast-message').innerText = message;
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            setTimeout(() => {
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
-        }
-    </script>
+renderVideos();
+renderPopular();
+</script>
+
+<script src="https://pl30627583.profitableratecpmnetwork.com/d5/60/79/d56079c7788bd3e1f5be8a617ee76745.js"></script>
+
 </body>
 </html>
